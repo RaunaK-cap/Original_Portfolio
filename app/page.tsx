@@ -10,7 +10,7 @@ export default function Home() {
       
       {/* The Content Dashboard with a smooth fade-out mask at the bottom */}
       <div 
-        className="w-[95%] sm:w-[90%] md:w-[75%] lg:w-[60%] xl:w-1/2 min-h-screen bg-white dark:bg-black text-black dark:text-white rounded-t-2xl shadow-[0_15px_40px_-5px_rgba(37,99,235,0.4)] dark:shadow-none border border-transparent dark:border-white/10 flex flex-col items-center transition-colors duration-500"
+        className="w-[95%] sm:w-[90%] md:w-[75%] lg:w-[60%] xl:w-1/2 min-h-screen bg-white dark:bg-black text-black dark:text-white rounded-t-md shadow-[0_15px_40px_-5px_rgba(37,99,235,0.4)] dark:shadow-none border border-transparent dark:border-white/10 flex flex-col items-center transition-colors duration-500"
         style={{
           WebkitMaskImage: 'linear-gradient(to bottom, black, black calc(100% - 180px), transparent 100%)',
           maskImage: 'linear-gradient(to bottom, black, black calc(100% - 180px), transparent 100%)'

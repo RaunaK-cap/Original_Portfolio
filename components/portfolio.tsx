@@ -8,10 +8,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Globe, ExternalLink, ArrowUpRight } from "lucide-react";
 
-// Animation settings for scroll reveal
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 /* =========================================
@@ -47,8 +46,8 @@ const EDUCATION_DATA = [
 
 // REPLACE: Update your Skills here
 const SKILLS_DATA = [
-  "React", "Next.js", "TypeScript", "Node.js", "Python", "C++", 
-  "TailwindCSS", "PostgreSQL", "MongoDB", "Docker"
+  "React", "Next.js", "TypeScript", "Node.js", "Python", "Rust", 
+  "Express.js", "PostgreSQL", "MongoDB", "Docker" , "AWS"
 ];
 
 // Pre-defined exact color themes for projects to ensure Tailwind successfully compiles the classes.
@@ -92,6 +91,14 @@ const PROJECTS_DATA = [
     tags: ["Next.js", "TypeScript", "Solidity", "Avalanche"],
     link: "#",
     colorTheme: "blue"
+  },{
+    title: "Aura Protocol",
+    status: "beta",
+    date: "2023 — 2024",
+    description: "Fast. Efficient. Revolutionary. Experience the future of blockchain with Aura - where speed meets innovation.",
+    tags: ["Next.js", "TypeScript", "Solidity", "Avalanche"],
+    link: "#",
+    colorTheme: "blue"
   }
 ];
 
@@ -107,10 +114,13 @@ export function Portfolio() {
         <div className="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-6 w-full">
           <div>
             {/* REPLACE: Update your hero headline */}
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">Hi, I'm Raunak 👋</h1>
+            <h1 className="flex flex-col gap-3 text-4xl md:text-5xl font-bold tracking-tight mb-3">
+              <span>Hi</span>
+              <span>I'm Raunak 👋</span>
+            </h1>
             {/* REPLACE: Update your subheader/role */}
-            <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl">
-              Full Stack Developer - building, learning, and sharing on the web.
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-sm">
+              20 / AI - Full Stack Developer / DevOps  - building, learning, and sharing on the web.
             </p>
           </div>
           <Avatar className="w-24 h-24 md:w-28 md:h-28 border-2 border-gray-100 dark:border-gray-800 shrink-0">
@@ -127,9 +137,9 @@ export function Portfolio() {
         </div>
 
         <div>
-          <h2 className="text-xl font-bold mb-3 mt-6">About</h2>
+          <h2 className="text-xl font-semibold mb-3 mt-6">TL:DR</h2>
           {/* REPLACE: Write your actual 'About Me' bio here */}
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
             I'm a full-stack developer currently building scalable decentralized applications. With experience across multiple startups, 
             I love turning ideas into products that bridge humans and technology. Beyond coding, I enjoy experimenting, sharing, 
             and contributing to the developer ecosystem.
@@ -194,10 +204,13 @@ export function Portfolio() {
         <h2 className="text-xl font-bold mb-6">Skills</h2>
         <div className="flex flex-wrap gap-2">
           {SKILLS_DATA.map((skill) => (
-            <Badge key={skill} variant="secondary" className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100 border-none px-3 py-1 text-sm font-normal">
+            <Badge key={skill} variant="outline" className="bg-gray-50 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-100 border border-gray-200 dark:border-gray-700 px-3 py-2 text-xs ">
               {skill}
             </Badge>
           ))}
+        </div>
+        <div>
+           <p className="mt-10 text-xs text-gray-300 dark:text-gray-400"> doesn't matter! she got someone else , however her smile was beautifull </p>
         </div>
       </motion.section>
 
@@ -219,7 +232,7 @@ export function Portfolio() {
             
             return (
               <a key={index} href={project.link} target="_blank" rel="noreferrer" className="group block">
-                <Card className={`flex flex-col h-full overflow-hidden border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-[#0a0a0a] shadow-sm transition-all duration-300 group-hover:shadow-md ${theme.cardHover}`}>
+                <Card className={`flex flex-col h-full overflow-hidden border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-[#0a0a0a] shadow-sm transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-xl ${theme.cardHover}`}>
                   {/* Project Image Placeholder */}
                   <div className={`w-full h-48 bg-gray-100 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800/80 flex items-center justify-center text-gray-400 transition-colors duration-300 shrink-0 ${theme.imgHover}`}>
                     <span className="text-sm font-medium">Project Image Placeholder</span>
