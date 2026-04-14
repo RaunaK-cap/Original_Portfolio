@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Globe, ExternalLink, ArrowUpRight } from "lucide-react";
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
@@ -104,26 +104,26 @@ const PROJECTS_DATA = [
 
 export function Portfolio() {
   return (
-    <div className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-24 px-4 pb-20 pt-10">
+    <div className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-24 px-6 md:px-4 pb-28 md:pb-20 pt-16 md:pt-10">
       
       {/* 1. HERO SECTION */}
       <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
         className="w-full flex flex-col gap-6"
       >
-        <div className="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-6 w-full">
-          <div>
+        <div className="flex flex-row items-start md:items-center justify-between gap-5 sm:gap-6 w-full">
+          <div className="flex flex-col gap-5">
             {/* REPLACE: Update your hero headline */}
-            <h1 className="flex flex-col gap-3 text-4xl md:text-5xl font-bold tracking-tight mb-3">
-              <span>Hi</span>
+            <h1 className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-tight">
+              <span>Hi,</span>
               <span>I'm Raunak 👋</span>
             </h1>
-            {/* REPLACE: Update your subheader/role */}
-            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-sm">
-              20 / AI - Full Stack Developer / DevOps  - building, learning, and sharing on the web.
+            <p className="flex flex-col gap-1 text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed pr-2">
+              <span className=" ">20 . AI Full Stack Engineer / DevOps </span>
+              <span className="text-xs md:text-sm text-gray-500">building, learning, and sharing on the web.</span>
             </p>
           </div>
-          <div className="w-24 h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
             {/* REPLACE: Add your actual photo to the 'public' folder and name it 'profile.jpg' 
                 Alternatively, paste the full URL of the uploaded image here! */}
             <img 
@@ -136,13 +136,13 @@ export function Portfolio() {
         </div>
 
         {/* Available For Hire Badge */}
-        <div className="flex items-center gap-2 px-4 py-2 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
-          <div className="w-2 h-2 bg-green-700 rounded-full animate-pulse"></div>
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and contracts </span>
+        <div className="flex items-center gap-1.5 md:gap-2 px-2 py-1 md:px-4 md:py-1 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
+          <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-700 rounded-full animate-pulse"></div>
+          <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and contracts </span>
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-3 mt-6">TL:DR</h2>
+          <h2 className="text-xl font-semibold mb-3 mt-6">About</h2>
           {/* REPLACE: Write your actual 'About Me' bio here */}
           <p className="text-gray-500 dark:text-gray-400 text-sm">
             I'm a full-stack developer currently building scalable decentralized applications. With experience across multiple startups, 
