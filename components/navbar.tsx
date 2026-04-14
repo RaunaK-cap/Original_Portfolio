@@ -8,7 +8,7 @@ export function Navbar() {
   return (
     // Sticky container wrapper to hold it top-center
     <div className="sticky top-6 z-50 w-full flex justify-center mb-10 mt-[-60px]">
-      <nav className="flex items-center gap-6 px-6 py-4 border border-gray-200/50 dark:border-white/10 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(255,255,255,0.04)] w-fit mx-auto">
+      <nav className="flex items-center gap-6 px-6 py-2 border border-gray-200/50 dark:border-white/10 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(255,255,255,0.04)] w-fit mx-auto">
         
         {/* Left Section */}
         <div className="flex items-center gap-5">

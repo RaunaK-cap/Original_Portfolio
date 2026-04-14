@@ -108,7 +108,7 @@ export function Portfolio() {
       
       {/* 1. HERO SECTION */}
       <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         className="w-full flex flex-col gap-6"
       >
         <div className="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-6 w-full">
@@ -123,17 +123,22 @@ export function Portfolio() {
               20 / AI - Full Stack Developer / DevOps  - building, learning, and sharing on the web.
             </p>
           </div>
-          <Avatar className="w-24 h-24 md:w-28 md:h-28 border-2 border-gray-100 dark:border-gray-800 shrink-0">
-            {/* REPLACE: Add your profile image URL here */}
-            <AvatarImage src="/placeholder-avatar.png" alt="Profile" />
-            <AvatarFallback className="bg-gray-100 text-3xl">R</AvatarFallback>
-          </Avatar>
+          <div className="w-24 h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
+            {/* REPLACE: Add your actual photo to the 'public' folder and name it 'profile.jpg' 
+                Alternatively, paste the full URL of the uploaded image here! */}
+            <img 
+              src="/profile.jpeg" 
+              alt="Raunak" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+              onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=R&background=random&size=200" }}
+            />
+          </div>
         </div>
 
         {/* Available For Hire Badge */}
-        <div className="flex items-center gap-2 px-4 py-2 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-full border border-gray-200 dark:border-gray-700">
-          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and collaborations</span>
+        <div className="flex items-center gap-2 px-4 py-2 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
+          <div className="w-2 h-2 bg-green-700 rounded-full animate-pulse"></div>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and contracts </span>
         </div>
 
         <div>
@@ -150,7 +155,7 @@ export function Portfolio() {
 
       {/* 2. WORK EXPERIENCE */}
       <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
         className="w-full"
       >
         <h2 className="text-xl font-bold mb-6">Work Experience</h2>
@@ -173,7 +178,7 @@ export function Portfolio() {
       </motion.section>
 
 
-      {/* 3. EDUCATION */}
+      {/* 3. EDUCATION
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
         className="w-full"
@@ -193,12 +198,12 @@ export function Portfolio() {
             </div>
           </div>
         ))}
-      </motion.section>
+      </motion.section> */}
 
       
       {/* 4. SKILLS */}
       <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
         className="w-full"
       >
         <h2 className="text-xl font-bold mb-6">Skills</h2>
@@ -217,13 +222,13 @@ export function Portfolio() {
 
       {/* 5. PROJECTS */}
       <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         className="w-full flex flex-col items-center"
       >
         <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">My Projects</Badge>
         <h2 className="text-3xl font-bold mb-4 text-center tracking-tight">Check out my latest work</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-10 text-center max-w-xl">
-          I've worked on a variety of projects, from simple websites to complex web applications. Here are a few of my favorites.
+        <p className="text-gray-600 dark:text-gray-400 mb-10 text-center text-xs max-w-xl">
+          I've worked on a variety of projects. Here are a few of my favorites.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-4">
@@ -238,15 +243,15 @@ export function Portfolio() {
                     <span className="text-sm font-medium">Project Image Placeholder</span>
                   </div>
                   
-                  <CardContent className="p-6 flex-grow flex flex-col">
+                  <CardContent className=" flex-grow flex flex-col">
                     {/* Header row: Title + Badge + Arrow */}
                     <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-3">
-                        <h3 className={`text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors duration-300 ${theme.textHover}`}>
+                      <div className="flex items-center gap-2">
+                        <h3 className={`text-xl font-semibold text-gray-900 dark:text-yellow-100 transition-colors duration-300 ${theme.textHover}`}>
                           {project.title}
                         </h3>
                         {/* Status Badge */}
-                        <Badge variant="outline" className={`h-6 gap-1.5 rounded-full border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 transition-colors duration-300 font-normal ${theme.badgeHover}`}>
+                        <Badge variant="outline" className={`h-5 gap-1.5 rounded border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 transition-colors duration-300 ${theme.badgeHover}`}>
                           <div className={`w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600 transition-colors duration-300 ${theme.dotHover}`} />
                           {project.status}
                         </Badge>
@@ -258,14 +263,14 @@ export function Portfolio() {
                     <div className="text-sm text-gray-500 dark:text-gray-600 mb-5">{project.date}</div>
 
                     {/* Description */}
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
                       {project.description}
                     </p>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tags.map(tech => (
-                        <Badge key={tech} variant="outline" className={`font-normal rounded-md border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 transition-colors duration-300 ${theme.tagHover}`}>
+                        <Badge key={tech} variant="outline" className={`rounded-md border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 transition-colors duration-300 ${theme.tagHover}`}>
                           {tech}
                         </Badge>
                       ))}
@@ -281,7 +286,7 @@ export function Portfolio() {
       
       {/* 6. CONTACT CTA */}
       <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         className="w-full flex flex-col items-center mt-12 text-center"
       >
         <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">
