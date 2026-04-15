@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { Home, NotebookText, GitBranchIcon , } from "lucide-react";
+import { GitBranchPlusIcon, Home, NotebookText, } from "lucide-react";
 import { ModeToggle } from "./ui/thememode";
-import { Github01FreeIcons, GithubIcon, Linkedin01FreeIcons, Linkedin01Icon } from "@hugeicons/core-free-icons";
+import { Github } from "@hugeicons/core-free-icons";
 
 export function Navbar() {
   return (
@@ -25,14 +25,14 @@ export function Navbar() {
 
       {/* Middle Section */}
       <div className="flex items-center gap-5">
-        <Link href="https://github.com" target="_blank" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
-          <GitBranchIcon className="w-[1.1rem] h-[1.1rem]" strokeWidth={2.5} />
+        <Link href="https://github.com/RaunaK-cap" target="_blank" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
+          <GitBranchPlusIcon className="w-[1.1rem] h-[1.1rem]" strokeWidth={2.5} />
         </Link>
         <Link href="https://linkedin.com" target="_blank" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
           {/* <Linkedin01Icon className="w-[1.1rem] h-[1.1rem]" strokeWidth={2.5} /> */}
         </Link>
         {/* Custom SVG for X (Twitter) */}
-        <Link href="https://twitter.com" target="_blank" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
+        <Link href="https://x.com/caps_raunak" target="_blank" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
           <svg viewBox="0 0 24 24" className="w-[1.1rem] h-[1.1rem] fill-current" aria-hidden="true">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.007 4.076H5.022l12.06 15.694z" />
           </svg>

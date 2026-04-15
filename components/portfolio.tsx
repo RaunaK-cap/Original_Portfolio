@@ -46,8 +46,30 @@ const EDUCATION_DATA = [
 
 // REPLACE: Update your Skills here
 const SKILLS_DATA = [
-  "React", "Next.js", "TypeScript", "Node.js", "Python", "Rust", 
-  "Express.js", "PostgreSQL", "MongoDB", "Docker" , "AWS"
+  { name: "TailwindCSS", icon: "tailwindcss/06B6D4" },
+  { name: "JavaScript", icon: "javascript/F7DF1E" },
+  { name: "TypeScript", icon: "typescript/3178C6" },
+  { name: "React", icon: "react/61DAFB" },
+  { name: "Next.js", icon: "nextdotjs/ffffff" }, 
+  { name: "Node.js", icon: "nodedotjs/339933" },
+  { name: "Express.js", icon: "express/ffffff" },
+  { name: "MongoDB", icon: "mongodb/47A248" },
+  { name: "Prisma", icon: "prisma/5A67D8" },
+  { name: "PostgreSQL", icon: "postgresql/4169E1" },
+  { name: "NeonDB", icon: "neon/00E599" },
+  { name: "NextAuth", icon: "linux/9333EA" }, 
+  { name: "Zod", icon: "zod/3068B7" },
+  { name: "Zustand", icon: "react/7F5A3E" }, 
+  { name: "Redis", icon: "redis/DC382D" },
+  { name: "Docker", icon: "docker/2496ED" },
+  { name: "WebSocket", icon: "socketdotio/ffffff" }, 
+  { name: "CI/CD", icon: "githubactions/2088FF" },
+  { name: "Turborepo", icon: "turborepo/EF4444" },
+  { name: "Langchain", icon: "langchain/ffffff" }, 
+  { name: "MCP", icon: "json/FFA500" }, 
+  { name: "Postman", icon: "postman/FF6C37" },
+  { name: "Git", icon: "git/F05032" },
+  { name: "VS Code", icon: "visualstudiocode/007ACC" },
 ];
 
 // Pre-defined exact color themes for projects to ensure Tailwind successfully compiles the classes.
@@ -111,19 +133,23 @@ export function Portfolio() {
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
         className="w-full flex flex-col gap-6"
       >
-        <div className="flex flex-row items-start md:items-center justify-between gap-5 sm:gap-6 w-full">
-          <div className="flex flex-col gap-5">
-            {/* REPLACE: Update your hero headline */}
-            <h1 className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-tight">
-              <span>Hi,</span>
-              <span>I'm Raunak 👋</span>
-            </h1>
-            <p className="flex flex-col gap-1 text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed pr-2">
-              <span className=" ">20 . AI Full Stack Engineer / DevOps </span>
-              <span className="text-xs md:text-sm text-gray-500">building, learning, and sharing on the web.</span>
-            </p>
-          </div>
-          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
+        <div className="flex flex-col gap-6 w-full">
+          
+          {/* Top Row: Headline (Left) + Image (Right) */}
+          <div className="flex flex-row items-start justify-between gap-4 md:gap-6 w-full">
+            {/* Headline and Subtitle */}
+            <div className="flex flex-col gap-2 pt-2 md:pt-4">
+              <h1 className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-tight">
+                <span>Hi,</span>
+                <span>I'm Raunak 👋 </span>
+              </h1>
+              <p className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 text-md  tracking-none pr-2">
+                <span className="">20 • AI Full Stack Engineer / DevOps</span>
+              </p>
+            </div>
+
+            {/* Profile Image Column (Right side) */}
+          <div className="w-24 h-24 sm:w-24 sm:h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
             {/* REPLACE: Add your actual photo to the 'public' folder and name it 'profile.jpg' 
                 Alternatively, paste the full URL of the uploaded image here! */}
             <img 
@@ -133,22 +159,42 @@ export function Portfolio() {
               onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=R&background=random&size=200" }}
             />
           </div>
-        </div>
+          </div>
 
-        {/* Available For Hire Badge */}
-        <div className="flex items-center gap-1.5 md:gap-2 px-2 py-1 md:px-4 md:py-1 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
-          <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-700 rounded-full animate-pulse"></div>
-          <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and contracts </span>
-        </div>
+          {/* Bottom Row: Full Width Bio & Badge */}
+          <div className="flex flex-col gap-6 w-full">
+            {/* Structured Highlight Bio */}
+            <div className="flex flex-col gap-4 text-gray-500 dark:text-gray-300 text-sm  leading-relaxed w-full">
+              <p>
+                I build <span className="text-orange-600 dark:text-orange-200/90 font-medium">full-stack applications</span>. Passionate about creating projects that make a <span className="text-orange-600 dark:text-orange-200/90 font-medium">real-world impact</span>. I focus on clean code and user experience.
+              </p>
+              
+              <div className="flex items-center gap-2 flex-wrap">
+                Previously interned at 
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-white text-xs font-medium border border-gray-200 dark:border-gray-700">
+                   <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+                   Dummy Startup
+                </span> 
+                building AI infrastructure.
+              </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-3 mt-6">About</h2>
-          {/* REPLACE: Write your actual 'About Me' bio here */}
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
-            I'm a full-stack developer currently building scalable decentralized applications. With experience across multiple startups, 
-            I love turning ideas into products that bridge humans and technology. Beyond coding, I enjoy experimenting, sharing, 
-            and contributing to the developer ecosystem.
-          </p>
+              <p>
+                I work with <strong className="text-gray-900 dark:text-white font-medium">Next.js</strong> and <strong className="text-gray-900 dark:text-white font-medium">Rust</strong> most days, using <strong className="text-gray-900 dark:text-white font-medium">TypeScript</strong> for type safety. I enjoy building things that look good and perform well.
+              </p>
+
+              <p>
+                Open to <strong className="text-gray-900 dark:text-white font-medium">collaborations</strong> and <strong className="text-gray-900 dark:text-white font-medium">opportunities</strong>. Feel free to reach out!
+              </p>
+            </div>
+
+            {/* Available For Hire Badge */}
+            <div className="flex items-center gap-1.5 md:gap-2 px-2 py-1 md:px-4 md:py-1 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-700 rounded-full animate-pulse"></div>
+              <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and contracts </span>
+            </div>
+
+          </div>
+          
         </div>
       </motion.section>
 
@@ -178,40 +224,24 @@ export function Portfolio() {
       </motion.section>
 
 
-      {/* 3. EDUCATION
-      <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
-        className="w-full"
-      >
-        <h2 className="text-xl font-bold mb-6">Education</h2>
-        {EDUCATION_DATA.map((edu, index) => (
-          <div key={index} className="flex gap-4 items-center mb-6 last:mb-0">
-            <Avatar className="w-10 h-10 border border-gray-200 dark:border-gray-700 bg-gray-50 flex items-center justify-center">
-               <AvatarFallback className="text-xs">{edu.logoFallback}</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col md:flex-row md:items-center justify-between w-full gap-2">
-              <div>
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100">{edu.institution}</h3>
-                <p className="text-sm text-gray-500">{edu.degree}</p>
-              </div>
-              <span className="text-sm text-gray-400">{edu.duration}</span>
-            </div>
-          </div>
-        ))}
-      </motion.section> */}
-
       
       {/* 4. SKILLS */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
         className="w-full"
       >
-        <h2 className="text-xl font-bold mb-6">Skills</h2>
-        <div className="flex flex-wrap gap-2">
+        <h2 className="text-xl font-bold  mb-6  tracking-tight">Skills & Tools</h2>
+        <div className="flex flex-wrap gap-2.5">
           {SKILLS_DATA.map((skill) => (
-            <Badge key={skill} variant="outline" className="bg-gray-50 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-100 border border-gray-200 dark:border-gray-700 px-3 py-2 text-xs ">
-              {skill}
-            </Badge>
+            <div key={skill.name} className="flex items-center gap-2.5 bg-gray-100/80 dark:bg-[#111111]/90 hover:dark:bg-[#1a1a1a] text-gray-800 dark:text-[#EAEAEA] border border-gray-200/60 dark:border-white/[0.06] px-3.5 py-1.5 rounded-lg transition-colors cursor-default shadow-sm">
+              <img 
+                src={`https://cdn.simpleicons.org/${skill.icon}`} 
+                alt={skill.name} 
+                className="w-4 h-4 object-contain opacity-90 drop-shadow-sm" 
+                onError={(e) => e.currentTarget.style.display = 'none'} 
+              />
+              <span className="text-xs ">{skill.name}</span>
+            </div>
           ))}
         </div>
         <div>
