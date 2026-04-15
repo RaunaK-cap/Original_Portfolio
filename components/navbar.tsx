@@ -66,9 +66,13 @@ export function Navbar() {
             </motion.div>
           </Link>
           {/* Custom SVG for X (Twitter) */}
-          <Link href="https://x.com/caps_raunak" target="_blank">
-            <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="p-1 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer">
-              <svg viewBox="0 0 24 24" className="w-[1.1rem] h-[1.1rem] fill-current" aria-hidden="true">
+          <Link href="https://x.com/caps_raunak" target="_blank" className="group relative flex items-center justify-center">
+            
+            {/* Continuous Pulse Ring */}
+            <div className="absolute inset-0 m-auto w-6 h-6 rounded-full bg-gray-300/60 dark:bg-gray-500/40 animate-ping transition-all"></div>
+            
+            <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="relative z-10 p-1 text-gray-600 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white transition-colors cursor-pointer">
+              <svg viewBox="0 0 24 24" className="w-[1.1rem] h-[1.1rem] fill-current drop-shadow-sm" aria-hidden="true">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.007 4.076H5.022l12.06 15.694z" />
               </svg>
             </motion.div>

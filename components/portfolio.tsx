@@ -24,8 +24,19 @@ const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.1,
       delayChildren: 0.1,
+    },
+  },
+};
+
+const fastStaggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.05,
     },
   },
 };
@@ -36,7 +47,7 @@ const textReveal: Variants = {
     opacity: 1, 
     y: 0, 
     filter: "blur(0px)", 
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+    transition: { type: "spring", bounce: 0, duration: 0.95 } 
   },
 };
 
@@ -248,22 +259,22 @@ export function Portfolio() {
         className="w-full flex flex-col gap-6"
       >
         <div className="flex flex-col gap-6 w-full">
-          
-          {/* Top Row: Headline (Left) + Image (Right) */}
-          <div className="flex flex-row items-start justify-between gap-4 md:gap-6 w-full">
+          <div className="flex flex-row items-start justify-between gap-2 sm:gap-4 md:gap-6 w-full">
             {/* Headline and Subtitle */}
-            <div className="flex flex-col gap-2 pt-2 md:pt-4">
-              <motion.h1 variants={textReveal} className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-tight">
+            <div className="flex flex-col gap-2 pt-2 md:pt-4 min-w-0">
+              <motion.h1 variants={textReveal} className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-none leading-tight">
                 <span>Hi,</span>
-                <span>I'm Raunak 👋 </span>
+                <span className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2">
+                  <span>I'm Raunak<span className="hidden md:inline-block ml-2">👋</span></span>
+                </span>
               </motion.h1>
-              <motion.p variants={textReveal} className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 text-md  tracking-none pr-2">
-                <span className="">20 • AI Full Stack Engineer / DevOps</span>
+              <motion.p variants={textReveal} className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 tracking-none pr-1 sm:pr-2">
+                <span className="text-xs sm:text-base">20 • AI Full Stack Engineer / DevOps</span>
               </motion.p>
             </div>
 
             {/* Profile Image Column (Right side) */}
-          <motion.div variants={textReveal} className="w-24 h-24 sm:w-24 sm:h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
+          <motion.div variants={textReveal} className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
             {/* REPLACE: Add your actual photo to the 'public' folder and name it 'profile.jpg' 
                 Alternatively, paste the full URL of the uploaded image here! */}
             <img 
@@ -402,13 +413,14 @@ export function Portfolio() {
         {/* 4. SKILLS */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
-        variants={staggerContainer}
+        variants={fastStaggerContainer}
         className="w-full"
       >
         <motion.h2 variants={textReveal} className="text-xl font-bold mb-6 tracking-tight">Skills & Tools</motion.h2>
         <div className="flex flex-wrap gap-2.5">
           {SKILLS_DATA.map((skill) => (
-            <div 
+            <motion.div 
+              variants={textReveal}
               key={skill.name} 
               className="group flex items-center gap-1.5 bg-[#f8f9fa] dark:bg-[#111111]/90 hover:bg-white dark:hover:bg-[#1a1a1a] text-gray-700 dark:text-[#EAEAEA] border border-gray-200/80 dark:border-white/[0.06] px-2.5 py-1 rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer"
             >
@@ -419,7 +431,7 @@ export function Portfolio() {
                 onError={(e) => e.currentTarget.style.display = 'none'} 
               />
               <span className="text-[11.5px] font-medium tracking-tight">{skill.name}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
         <div>
@@ -463,8 +475,8 @@ export function Portfolio() {
             Freelance & Collaboration
           </Badge>
         </motion.div>
-        <motion.h2 variants={textReveal} className="text-3xl md:text-4xl font-bold mb-6 tracking-tight max-w-md">Ready to Build Something Great?</motion.h2>
-        <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 mb-8 max-w-xl">
+        <motion.h2 variants={textReveal} className="text-xl md:text-4xl font-bold mb-6 tracking-tight max-w-md">Ready to Build Something Great?</motion.h2>
+        <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 text-sm md:text-md mb-7 max-w-xl">
           I'm available for freelance projects, consulting, and collaborations. Whether you need a web app, front-end magic, 
           or full-stack development, let's discuss how I can help bring your vision to life.
         </motion.p>

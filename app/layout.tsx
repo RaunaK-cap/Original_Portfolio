@@ -31,12 +31,11 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", inter.variable, geistMono.variable, "font-sans")}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col transition-colors duration-700 ease-in-out">
         <ThemeProvider
             attribute="class"
             defaultTheme="Light"
             enableSystem
-            disableTransitionOnChange
           >
             {children}
           </ThemeProvider>
