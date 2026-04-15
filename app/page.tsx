@@ -4,7 +4,7 @@ import { Portfolio } from "@/components/portfolio";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center pt-4 ">
+    <div className="relative min-h-screen w-full flex flex-col items-center  pt-1 md:pt-2 ">
       {/* Background component sits purely in the back */}
       <Background />
       
