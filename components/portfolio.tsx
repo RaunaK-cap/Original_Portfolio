@@ -15,8 +15,29 @@ const GithubIcon = ({ className, strokeWidth = 2 }: { className?: string, stroke
 );
 
 const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const textReveal: Variants = {
+  hidden: { opacity: 0, y: 25, filter: "blur(8px)" },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    filter: "blur(0px)", 
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+  },
 };
 
 /* =========================================
@@ -220,8 +241,9 @@ export function Portfolio() {
     <div className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-24 px-6 md:px-4 pb-28 md:pb-20 pt-16 md:pt-10">
       
       {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION */}
       <motion.section 
-        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
+        initial="hidden" animate="visible" variants={staggerContainer}
         className="w-full flex flex-col gap-6"
       >
         <div className="flex flex-col gap-6 w-full">
@@ -230,17 +252,17 @@ export function Portfolio() {
           <div className="flex flex-row items-start justify-between gap-4 md:gap-6 w-full">
             {/* Headline and Subtitle */}
             <div className="flex flex-col gap-2 pt-2 md:pt-4">
-              <h1 className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-tight">
+              <motion.h1 variants={textReveal} className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-tight">
                 <span>Hi,</span>
                 <span>I'm Raunak 👋 </span>
-              </h1>
-              <p className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 text-md  tracking-none pr-2">
+              </motion.h1>
+              <motion.p variants={textReveal} className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 text-md  tracking-none pr-2">
                 <span className="">20 • AI Full Stack Engineer / DevOps</span>
-              </p>
+              </motion.p>
             </div>
 
             {/* Profile Image Column (Right side) */}
-          <div className="w-24 h-24 sm:w-24 sm:h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
+          <motion.div variants={textReveal} className="w-24 h-24 sm:w-24 sm:h-24 md:w-28 md:h-28 shrink-0 overflow-hidden border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_15px_40px_-10px_rgba(255,255,255,0.05)] bg-white dark:bg-[#0a0a0a] group hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.08)] transition-all duration-500">
             {/* REPLACE: Add your actual photo to the 'public' folder and name it 'profile.jpg' 
                 Alternatively, paste the full URL of the uploaded image here! */}
             <img 
@@ -249,40 +271,40 @@ export function Portfolio() {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
               onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=R&background=random&size=200" }}
             />
-          </div>
+          </motion.div>
           </div>
 
           {/* Bottom Row: Full Width Bio & Badge */}
           <div className="flex flex-col gap-6 w-full">
             {/* Structured Highlight Bio */}
             <div className="flex flex-col gap-4 text-gray-500 dark:text-gray-300 text-sm  leading-relaxed w-full">
-              <p>
+              <motion.p variants={textReveal}>
                 I build <span className="text-orange-600 dark:text-orange-200/90 font-medium">full-stack applications</span>. Passionate about creating projects that make a <span className="text-orange-600 dark:text-orange-200/90 font-medium">real-world impact</span>. I focus on clean code and user experience.
-              </p>
+              </motion.p>
               
-              <div className="flex items-center gap-2 flex-wrap">
+              <motion.div variants={textReveal} className="flex items-center gap-2 flex-wrap">
                 Previously interned at 
                 <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-white text-xs font-medium border border-gray-200 dark:border-gray-700">
                    <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
                    Dummy Startup
                 </span> 
                 building AI infrastructure.
-              </div>
+              </motion.div>
 
-              <p>
+              <motion.p variants={textReveal}>
                 I work with <strong className="text-gray-900 dark:text-white font-medium">Next.js</strong> and <strong className="text-gray-900 dark:text-white font-medium">Rust</strong> most days, using <strong className="text-gray-900 dark:text-white font-medium">TypeScript</strong> for type safety. I enjoy building things that look good and perform well.
-              </p>
+              </motion.p>
 
-              <p>
+              <motion.p variants={textReveal}>
                 Open to <strong className="text-gray-900 dark:text-white font-medium">collaborations</strong> and <strong className="text-gray-900 dark:text-white font-medium">opportunities</strong>. Feel free to reach out!
-              </p>
+              </motion.p>
             </div>
 
             {/* Available For Hire Badge */}
-            <div className="flex items-center gap-1.5 md:gap-2 px-2 py-1 md:px-4 md:py-1 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
+            <motion.div variants={textReveal} className="flex items-center gap-1.5 md:gap-2 px-2 py-1 md:px-4 md:py-1 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
               <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-700 rounded-full animate-pulse"></div>
               <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and contracts </span>
-            </div>
+            </motion.div>
 
           </div>
           
@@ -291,12 +313,12 @@ export function Portfolio() {
 
 
       {/* 2. WORK EXPERIENCE */}
-      {/* 2. WORK EXPERIENCE */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
+        variants={staggerContainer}
         className="w-full"
       >
-        <h2 className="text-xl md:text-2xl font-bold mb-10 tracking-tight text-gray-900 dark:text-white">Work Experience</h2>
+        <motion.h2 variants={textReveal} className="text-xl md:text-2xl font-bold mb-10 tracking-tight text-gray-900 dark:text-white">Work Experience</motion.h2>
         
         <div className="relative flex flex-col gap-10 pl-2 md:pl-0">
           {/* The Pipeline Line layered underneath the nodes */}
@@ -336,16 +358,19 @@ export function Portfolio() {
 
 
 
-      {/* 5. PROJECTS */}
+      {/* 3. PROJECTS */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
         className="w-full flex flex-col items-center"
-        >
-        <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">My Projects</Badge>
-        <h2 className="text-3xl font-bold mb-4 text-center tracking-tight">Check out my latest work</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-10 text-center text-xs max-w-xl">
+      >
+        <motion.div variants={textReveal}>
+          <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">My Projects</Badge>
+        </motion.div>
+        <motion.h2 variants={textReveal} className="text-3xl font-bold mb-4 text-center tracking-tight">Check out my latest work</motion.h2>
+        <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 mb-10 text-center text-xs max-w-xl">
           I've worked on a variety of projects. Here are a few of my favorites.
-        </p>
+        </motion.p>
         
         <div className="flex flex-col gap-6 w-full mt-4 mb-4">
           {PROJECTS_DATA.map((project, index) => {
@@ -362,11 +387,12 @@ export function Portfolio() {
       </motion.section>
 
         {/* 4. SKILLS */}
-             <motion.section 
+      <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
+        variants={staggerContainer}
         className="w-full"
       >
-        <h2 className="text-xl font-bold  mb-6 tracking-tight">Skills & Tools</h2>
+        <motion.h2 variants={textReveal} className="text-xl font-bold mb-6 tracking-tight">Skills & Tools</motion.h2>
         <div className="flex flex-wrap gap-2.5">
           {SKILLS_DATA.map((skill) => (
             <div 
@@ -388,24 +414,51 @@ export function Portfolio() {
         </div>
       </motion.section>
 
+      {/* 5. GITHUB ACTIVITY */}
+      <motion.section 
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+        className="w-full flex flex-col pt-0 md:pt-4"
+      >
+        <motion.h2 variants={textReveal} className="text-xl font-bold mb-6 tracking-none">GitHub Activity</motion.h2>
+        {/* Hide scrollbar structure securely but allow x-scroll for heavy mobile viewing */}
+        <div className="w-full bg-[#f8f9fa] dark:bg-[#111111]/80 border border-gray-200/80 dark:border-white/[0.06] rounded-[14px] p-4 md:p-6 shadow-sm flex justify-center relative overflow-hidden">
+          <div className="overflow-x-auto w-full flex justify-start md:justify-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <img 
+              src="https://ghchart.rshah.org/10b981/RaunaK-cap" 
+              alt="GitHub Contributions" 
+              className="min-w-[750px] w-full max-w-[900px] opacity-90 transition-opacity duration-300 pointer-events-none dark:invert-[0.9] dark:hue-rotate-[180deg] dark:saturate-150 dark:brightness-[1.1] dark:contrast-125 dark:opacity-80 dark:hover:opacity-100"
+              style={{
+                clipPath: "inset(18px 0 0 0)",
+                marginTop: "-12px",
+                marginBottom: "-6px"
+              }}
+            />
+          </div>
+        </div>
+      </motion.section>
+
       
       {/* 6. CONTACT CTA */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
         className="w-full flex flex-col items-center mt-12 text-center"
       >
-        <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">
-          Freelance & Collaboration
-        </Badge>
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight max-w-md">Ready to Build Something Great?</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-xl">
+        <motion.div variants={textReveal}>
+          <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">
+            Freelance & Collaboration
+          </Badge>
+        </motion.div>
+        <motion.h2 variants={textReveal} className="text-3xl md:text-4xl font-bold mb-6 tracking-tight max-w-md">Ready to Build Something Great?</motion.h2>
+        <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 mb-8 max-w-xl">
           I'm available for freelance projects, consulting, and collaborations. Whether you need a web app, front-end magic, 
           or full-stack development, let's discuss how I can help bring your vision to life.
-        </p>
-        <div className="flex items-center gap-4">
+        </motion.p>
+        <motion.div variants={textReveal} className="flex items-center gap-4">
           <Button variant="default" className="rounded-full">Book a Free Consultation</Button>
           <Button variant="outline" className="rounded-full">Send an Email</Button>
-        </div>
+        </motion.div>
       </motion.section>
 
     </div>
