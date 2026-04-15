@@ -323,7 +323,7 @@ export function Portfolio() {
               {/* Content Node */}
               <div className="flex flex-col md:flex-row md:items-center justify-between w-full gap-2 md:gap-4 mt-0.5 md:mt-1">
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-[10px] md:text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100 transition-colors">{exp.company}</h3>
+                  <h3 className="text-[15px] md:text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100 transition-colors">{exp.company}</h3>
                   <p className="text-[12px] text-gray-500 dark:text-[#a1a1aa]">{exp.role}</p>
                 </div>
                 <span className="text-[13px] md:text-[13.5px] font-medium text-gray-400 dark:text-[#71717a] mt-1 md:mt-0">{exp.duration}</span>
