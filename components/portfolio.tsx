@@ -48,16 +48,17 @@ const textReveal: Variants = {
 // REPLACE: Update your Work Experience here
 const EXPERIENCE_DATA = [
   {
-    company: "Dummy Company Corp",
-    role: "Full Stack Developer",
-    duration: "Feb 2024 - Present",
-    logoFallback: "CO",
+    company: "Freelance",
+    role: "Freelance Software Engineer",
+    duration: "Jan 2026 - Present",
+    logoFallback: "FR",
   },
   {
-    company: "Stealth Startup",
-    role: "Frontend Intern",
-    duration: "Aug 2023 - Jan 2024",
-    logoFallback: "SU",
+    company: "Hacktoberfest",
+    role: "Full Stack Engineer",
+    duration: "Sep 2025 - Oct 2025",
+    logoFallback: "HF",
+    description: "Gained hands-on experience in open-source. Contributed to lot of Open source repository.",
   },
 ];
 
@@ -301,9 +302,12 @@ export function Portfolio() {
             </div>
 
             {/* Available For Hire Badge */}
-            <motion.div variants={textReveal} className="flex items-center gap-1.5 md:gap-2 px-2 py-1 md:px-4 md:py-1 bg-gray-100/50 dark:bg-gray-800/50 w-fit rounded-sm border border-gray-200 dark:border-gray-700">
-              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-700 rounded-full animate-pulse"></div>
-              <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">Available - Open to new projects and contracts </span>
+            <motion.div variants={textReveal} className="group flex items-center gap-2 px-2.5 py-1.5 md:px-4 md:py-1.5 bg-gray-100/50 dark:bg-[#111111]/80 w-fit rounded-full border border-gray-200 dark:border-white/10 hover:border-green-500/30 dark:hover:border-green-500/30 transition-colors cursor-default shadow-sm">
+              <div className="relative flex h-2 w-2 md:h-2.5 md:w-2.5 items-center justify-center">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 duration-1000"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 md:h-2 md:w-2 bg-green-600 dark:bg-green-500"></span>
+              </div>
+              <span className="text-[12px] md:text-[13px] font-medium text-gray-700 dark:text-gray-300">Available for new projects</span>
             </motion.div>
 
           </div>
@@ -343,12 +347,21 @@ export function Portfolio() {
               </div>
 
               {/* Content Node */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between w-full gap-2 md:gap-4 mt-0.5 md:mt-1">
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-[15px] md:text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100 transition-colors">{exp.company}</h3>
-                  <p className="text-[12px] text-gray-500 dark:text-[#a1a1aa]">{exp.role}</p>
+              <div className="flex flex-col w-full gap-2 mt-0.5 md:mt-1">
+                <div className="flex flex-col md:flex-row md:items-start justify-between w-full gap-1 md:gap-4">
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-[15px] md:text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100 transition-colors">{exp.company}</h3>
+                    <p className="text-[12px] text-gray-500 dark:text-[#a1a1aa]">{exp.role}</p>
+                  </div>
+                  <span className="text-[13px] md:text-[13.5px] font-medium text-gray-400 dark:text-[#71717a] mt-1 md:mt-0">{exp.duration}</span>
                 </div>
-                <span className="text-[13px] md:text-[13.5px] font-medium text-gray-400 dark:text-[#71717a] mt-1 md:mt-0">{exp.duration}</span>
+                
+                {/* Optional Expanded Description */}
+                {(exp as any).description && (
+                  <p className="text-xs tracking-wide text-gray-600 dark:text-[#94a3b8] leading-relaxed max-w-xl mt-1.5">
+                    {(exp as any).description}
+                  </p>
+                )}
               </div>
             </motion.div>
           ))}
