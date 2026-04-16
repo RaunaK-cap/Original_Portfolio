@@ -34,8 +34,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col transition-colors duration-700 ease-in-out">
         <ThemeProvider
             attribute="class"
-            defaultTheme="Light"
-            enableSystem
+            defaultTheme="light"
+            enableSystem={false}
+            storageKey="portfolio-theme"
           >
             {children}
           </ThemeProvider>
