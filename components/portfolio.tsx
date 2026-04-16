@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -63,13 +63,16 @@ const EXPERIENCE_DATA = [
     role: "Freelance Software Engineer",
     duration: "Jan 2026 - Present",
     logoFallback: "FR",
+    logo: "https://cdn.simpleicons.org/fiverr/1DBF73",
+    description: "Built the scalable backend for a web agency, developed a modern landing page for another, shipped an AI automation system using n8n for a client.",
   },
   {
     company: "Hacktoberfest",
     role: "Full Stack Engineer",
     duration: "Sep 2025 - Oct 2025",
     logoFallback: "HF",
-    description: "Gained hands-on experience in open-source. Contributed to lot of Open source repository.",
+    logo: "https://cdn.simpleicons.org/hacktoberfest/0069FF",
+    description: "Contributed to multiple open-source repositories and gained hands-on experience with collaborative development.",
   },
 ];
 
@@ -85,30 +88,50 @@ const EDUCATION_DATA = [
 
 // REPLACE: Update your Skills here
 const SKILLS_DATA = [
-  { name: "TailwindCSS", icon: "tailwindcss/06B6D4" },
+  // --- Infrastructure & Automation ---
+  { name: "AWS", icon: "amazonaws/232F3E" },
+  { name: "Docker", icon: "docker/2496ED" },
+  { name: "CI/CD", icon: "githubactions/2088FF" },
+  { name: "Kubernetes", icon: "kubernetes/326CE5" },
+  
+  // --- AI & Ecosystem ---
+  { name: "MCP", icon: "json/FFA500" },
+  { name: "AI Agents", icon: "openai/412991" },
+  { name: "Cursor", icon: "cursor/000000" },
+  { name: "VS Code", icon: "visualstudiocode/007ACC" },
+  { name: "Antigravity", icon: "googlegemini/8E75B2" },
+  
+  // --- Databases & Streaming ---
+  { name: "Redis", icon: "redis/DC382D" },
+  { name: "Kafka", icon: "apachekafka/231F20" },
+  { name: "WebSocket", icon: "socketdotio/ffffff" },
+  { name: "gRPC", icon: "grpc/244C5A" },
+
+  // --- Languages & Frontend ---
+  { name: "Rust", icon: "rust/000000" },
   { name: "JavaScript", icon: "javascript/F7DF1E" },
   { name: "TypeScript", icon: "typescript/3178C6" },
   { name: "React", icon: "react/61DAFB" },
-  { name: "Next.js", icon: "nextdotjs/ffffff" }, 
+  { name: "Next.js", icon: "nextdotjs/000000" }, 
+  { name: "TailwindCSS", icon: "tailwindcss/06B6D4" }, 
+
+  // --- Backend & APIs ---
   { name: "Node.js", icon: "nodedotjs/339933" },
-  { name: "Express.js", icon: "express/ffffff" },
-  { name: "MongoDB", icon: "mongodb/47A248" },
-  { name: "Prisma", icon: "prisma/5A67D8" },
-  { name: "PostgreSQL", icon: "postgresql/4169E1" },
-  { name: "NeonDB", icon: "neon/00E599" },
-  { name: "NextAuth", icon: "linux/9333EA" }, 
+  { name: "Express.js", icon: "express/000000" },
+  { name: "Better Auth", icon: "betterauth/000000" }, 
   { name: "Zod", icon: "zod/3068B7" },
-  { name: "Zustand", icon: "react/7F5A3E" }, 
-  { name: "Redis", icon: "redis/DC382D" },
-  { name: "Docker", icon: "docker/2496ED" },
-  { name: "WebSocket", icon: "socketdotio/ffffff" }, 
-  { name: "CI/CD", icon: "githubactions/2088FF" },
+  { name: "Langchain", icon: "langchain/000000" }, 
+  
+  // --- Databases & ORMs ---
+  { name: "PostgreSQL", icon: "postgresql/4169E1" },
+  { name: "MongoDB", icon: "mongodb/47A248" },
+  { name: "NeonDB", icon: "neon/00E599" },
+  { name: "Prisma", icon: "prisma/5A67D8" },
+
+  // --- Tools & Others ---
   { name: "Turborepo", icon: "turborepo/EF4444" },
-  { name: "Langchain", icon: "langchain/ffffff" }, 
-  { name: "MCP", icon: "json/FFA500" }, 
+  { name: "Git/GitHub", icon: "git/F05032" },
   { name: "Postman", icon: "postman/FF6C37" },
-  { name: "Git", icon: "git/F05032" },
-  { name: "VS Code", icon: "visualstudiocode/007ACC" },
 ];
 
 // Pre-defined exact color themes for projects to ensure Tailwind successfully compiles the classes.
@@ -193,31 +216,53 @@ function ProjectCard({ project, theme, index }: any) {
           {project.description}
         </p>
 
-        {/* Expanded Content */}
-        <div 
-          className={`overflow-hidden transition-all duration-500 ease-in-out flex flex-col ${isExpanded ? 'max-h-[800px] opacity-100 mb-6' : 'max-h-0 opacity-0 mb-0'}`}
-        >
-          {project.features && project.features.length > 0 && (
-            <div className="flex flex-col gap-4 mb-6">
-              {project.features.map((feature: string, idx: number) => (
-                <p key={idx} className="text-xs text-gray-600 dark:text-[#94a3b8] leading-relaxed">
-                  {feature}
-                </p>
-              ))}
-            </div>
-          )}
+        {/* Expanded Content using Framer Motion physics */}
+        <AnimatePresence initial={false}>
+          {isExpanded && (
+            <motion.div 
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1, transition: { type: "spring", stiffness: 400, damping: 30 } }}
+              exit={{ height: 0, opacity: 0, transition: { duration: 0.2, ease: "easeOut" } }}
+              className="overflow-hidden flex flex-col"
+            >
+              <motion.div 
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } }
+                }}
+                className="mb-6 pt-1"
+              >
+                {project.features && project.features.length > 0 && (
+                  <div className="flex flex-col gap-4 mb-6">
+                    {project.features.map((feature: string, idx: number) => (
+                      <motion.p 
+                        variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }} 
+                        key={idx} className="text-xs text-gray-600 dark:text-[#94a3b8] leading-relaxed"
+                      >
+                        {feature}
+                      </motion.p>
+                    ))}
+                  </div>
+                )}
 
-          {/* Tags */}
-          {project.tags && project.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2.5">
-              {project.tags.map((tech: string) => (
-                <div key={tech} className="px-2.5 py-1 text-[13px] font-mono rounded-none border border-gray-200 dark:border-white/[0.1] text-gray-700 dark:text-gray-400">
-                  {tech}
-                </div>
-              ))}
-            </div>
+                {/* Tags */}
+                {project.tags && project.tags.length > 0 && (
+                  <motion.div 
+                    variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }} 
+                    className="flex flex-wrap gap-2.5"
+                  >
+                    {project.tags.map((tech: string) => (
+                      <div key={tech} className="px-2.5 py-1 text-[13px] font-mono rounded-none border border-gray-200 dark:border-white/[0.1] text-gray-700 dark:text-gray-400">
+                        {tech}
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </motion.div>
+            </motion.div>
           )}
-        </div>
+        </AnimatePresence>
 
         {/* Footer */}
         <div className="flex items-center justify-between mt-auto">
@@ -249,6 +294,11 @@ function ProjectCard({ project, theme, index }: any) {
 }
 
 export function Portfolio() {
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
+  // Safe data pipeline slices
+  const displayedProjects = showAllProjects ? PROJECTS_DATA : PROJECTS_DATA.slice(0, 2);
+
   return (
     <div className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-24 px-6 md:px-4 pb-28 md:pb-20 pt-16 md:pt-10">
       
@@ -353,6 +403,7 @@ export function Portfolio() {
                 {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-white/5 dark:bg-white/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <Avatar className="w-10 h-10 md:w-11 md:h-11 border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#0c0c0c] flex items-center justify-center transition-all duration-300 group-hover:border-gray-300 dark:group-hover:border-white/20 shadow-sm relative z-10">
+                   {(exp as any).logo && <AvatarImage src={(exp as any).logo} alt={exp.company} className="object-contain p-2" />}
                    <AvatarFallback className="text-[11px] md:text-xs font-medium text-gray-600 dark:text-gray-400 bg-transparent">{exp.logoFallback}</AvatarFallback>
                 </Avatar>
               </div>
@@ -396,18 +447,37 @@ export function Portfolio() {
           I've worked on a variety of projects. Here are a few of my favorites.
         </motion.p>
         
-        <div className="flex flex-col gap-6 w-full mt-4 mb-4">
-          {PROJECTS_DATA.map((project, index) => {
-            const theme = PROJECT_THEMES[project.colorTheme] || PROJECT_THEMES.green;
-            return <ProjectCard key={index} project={project} theme={theme} index={index} />;
-          })}
-        </div>
+        <motion.div layout className="flex flex-col gap-6 w-full mt-4 mb-4">
+          <AnimatePresence mode="popLayout">
+            {displayedProjects.map((project, index) => {
+              const theme = PROJECT_THEMES[project.colorTheme] || PROJECT_THEMES.green;
+              return (
+                <motion.div
+                  key={project.title}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <ProjectCard project={project} theme={theme} index={index} />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
 
-        <div className="w-full flex justify-center mt-6 mb-8">
-           <button className="flex items-center gap-2 text-[14px] text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-200 transition-colors">
-             More Projects <ChevronDown className="w-4 h-4" />
-           </button>
-        </div>
+        {PROJECTS_DATA.length > 2 && (
+          <div className="w-full flex justify-center mt-6 mb-8">
+             <button 
+                onClick={() => setShowAllProjects(!showAllProjects)}
+                className="flex items-center gap-2 text-[14px] text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
+             >
+               {showAllProjects ? 'Show Less' : 'More Projects'} 
+               <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showAllProjects ? 'rotate-180' : ''}`} />
+             </button>
+          </div>
+        )}
       </motion.section>
 
         {/* 4. SKILLS */}
