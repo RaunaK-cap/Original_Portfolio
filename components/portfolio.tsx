@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -152,6 +153,22 @@ const PROJECT_THEMES: Record<string, any> = {
     badgeHover: "group-hover:border-blue-500/40 group-hover:text-blue-500",
     dotHover: "group-hover:bg-blue-500",
     tagHover: "group-hover:border-blue-500/30 group-hover:text-blue-600 dark:group-hover:text-blue-400"
+  },
+  orange: {
+    cardHover: "group-hover:border-orange-500/40 group-hover:bg-orange-500/[0.02]",
+    imgHover: "group-hover:border-orange-500/30",
+    textHover: "group-hover:text-orange-500",
+    badgeHover: "group-hover:border-orange-500/40 group-hover:text-orange-500",
+    dotHover: "group-hover:bg-orange-500",
+    tagHover: "group-hover:border-orange-500/30 group-hover:text-orange-600 dark:group-hover:text-orange-400"
+  },
+  purple: {
+    cardHover: "group-hover:border-purple-500/40 group-hover:bg-purple-500/[0.02]",
+    imgHover: "group-hover:border-purple-500/30",
+    textHover: "group-hover:text-purple-500",
+    badgeHover: "group-hover:border-purple-500/40 group-hover:text-purple-500",
+    dotHover: "group-hover:bg-purple-500",
+    tagHover: "group-hover:border-purple-500/30 group-hover:text-purple-600 dark:group-hover:text-purple-400"
   }
 };
 
@@ -159,37 +176,46 @@ const PROJECT_THEMES: Record<string, any> = {
 // Pick a theme from PROJECT_THEMES above for the `colorTheme`
 const PROJECTS_DATA = [
   {
-    title: "GitGenius",
-    description: "AI-powered CLI tool for analyzing Git commits, generating changelogs, and semantic search using LangChain and Gemini.",
+    title: "CrawlyMinds",
+    description: <>Developed an AI-powered platform called <strong>CrawlyMinds</strong> that allows users to enter any website link  and instantly get an AI-generated summary of its key points.</>,
     features: [
-      "AI-powered commit analysis and categorization using Google Gemini.",
-      "Semantic search - ask questions in natural language about your codebase.",
-      "Auto-generate professional changelogs grouped by category.",
-      "Export reports in JSON, Markdown, CSV, or beautiful HTML.",
-      "Incremental processing - only analyze new commits."
+      <>Integrated <strong>LangChain</strong> to process and split website content into smaller chunks.</>,
+      <>Converted content into vector embeddings using <strong>OpenAI's Embedding API</strong>.</>,
+      <>Stored vector data in <strong>Convex DB</strong> for efficient retrieval and <strong>PostgreSQL + Prisma ORM</strong> for auth.</>,
+      <>Implemented a <strong>RAG (Retrieval-Augmented Generation)</strong> system for direct data chatting.</>,
+      <>Built a clean chat interface using <strong>Next.js</strong>, <strong>Tailwind CSS</strong>, and <strong>Shadcn UI</strong>.</>,
+      <>Planned future expansion to support <strong>chat with PDFs</strong> using the same RAG architecture.</>
     ],
-    tags: ["Node.js", "LangChain", "Gemini API", "Prisma", "SQLite"],
-    link: "#",
-    github: "#",
+    tags: ["Next.js", "LangChain", "OpenAI", "Prisma", "ConvexDB" , "RAG"],
+    link: "https://crawlyminds.vercel.app",
+    github: "https://github.com/RaunaK-cap/CrawlyMinds",
     colorTheme: "green"
   },
   {
-    title: "FlowPay",
-    description: "A simulated wallet system enabling peer-to-peer transfers and balance additions through a simulated bank.",
-    features: [],
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-    link: "#",
-    github: "#",
+    title: "PatchMind",
+    description: <>Built <strong>PatchMind</strong>, a developer-focused app to store and recall solved coding errors.</>,
+    features: [
+      <>Integrated <strong>AI assistant</strong> for explanations and debugging insights.</>,
+      <>Developed full-stack architecture using <strong>Next.js API routes</strong> for smooth data flow.</>,
+      <>Used secure authentication with <strong>Better Auth</strong> and <strong>PostgreSQL</strong> via <strong>Prisma ORM</strong>.</>
+    ],
+    tags: ["Next.js", "Better Auth", "Prisma", "PostgreSQL"],
+    link: "https://patchmind.vercel.app",
+    github: "https://github.com/RaunaK-cap/Patchmind",
     colorTheme: "blue"
   },
   {
-    title: "Feed-Wall",
-    description: "A platform to collect feedback via embeddable widgets, analyze feedback, and generate AI-powered summaries.",
-    features: [],
-    tags: ["React", "Express", "MongoDB", "OpenAI"],
-    link: "#",
-    github: "#",
-    colorTheme: "green"
+    title: "Quick Chat App",
+    description: <>Developed a real-time chat app using <strong>WebSockets</strong> where messages vanish automatically — no database required.</>,
+    features: [
+      <>Developed a 10-15 minute real-time communication system using <strong>WebSockets</strong>.</>,
+      <>Frontend built with <strong>React + Tailwind</strong>; backend uses simple <strong>HTTPS</strong> and websockets.</>,
+      <>Focused on speed and privacy: no persistent storage for messages.</>
+    ],
+    tags: ["React.js", "WebSockets", "Tailwind", "Axios"],
+    link: "https://quick-chat-app-three.vercel.app",
+    github: "https://github.com/RaunaK-cap/Chat-app",
+    colorTheme: "orange"
   }
 ];
 
@@ -204,7 +230,7 @@ function ProjectCard({ project, theme, index }: any) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="w-full"
     >
-      <div className={`relative flex flex-col w-full border border-dashed border-gray-200 dark:border-white/[0.1] bg-gray-50/50 dark:bg-transparent p-6 md:p-7 transition-all duration-300 rounded-sm hover:-translate-y-1 shadow-sm hover:shadow-md dark:shadow-none dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.01)] ${theme?.cardHover}`}>
+      <div className={`relative flex flex-col w-full border border-dashed border-gray-200 dark:border-white/[0.1] bg-gray-50/50 dark:bg-transparent p-6 md:p-7 transition-all duration-300 rounded-sm hover:-translate-y-1 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-gray-800 dark:shadow-none dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.01)] ${theme?.cardHover}`}>
         
         {/* Title */}
         <h3 className={`text-lg md:text-[19px] font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300 ${theme?.textHover}`}>
@@ -212,7 +238,7 @@ function ProjectCard({ project, theme, index }: any) {
         </h3>
         
         {/* Description */}
-        <p className="text-[14px] text-gray-600 dark:text-[#a1a1aa] mb-6 leading-relaxed pr-4">
+        <p className="text-[13px] text-gray-600 dark:text-[#a1a1aa] mb-6 leading-relaxed pr-4">
           {project.description}
         </p>
 
@@ -235,7 +261,7 @@ function ProjectCard({ project, theme, index }: any) {
               >
                 {project.features && project.features.length > 0 && (
                   <div className="flex flex-col gap-4 mb-6">
-                    {project.features.map((feature: string, idx: number) => (
+                    {project.features.map((feature: any, idx: number) => (
                       <motion.p 
                         variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }} 
                         key={idx} className="text-xs text-gray-600 dark:text-[#94a3b8] leading-relaxed"
@@ -245,24 +271,21 @@ function ProjectCard({ project, theme, index }: any) {
                     ))}
                   </div>
                 )}
-
-                {/* Tags */}
-                {project.tags && project.tags.length > 0 && (
-                  <motion.div 
-                    variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }} 
-                    className="flex flex-wrap gap-2.5"
-                  >
-                    {project.tags.map((tech: string) => (
-                      <div key={tech} className="px-2.5 py-1 text-[13px] font-mono rounded-none border border-gray-200 dark:border-white/[0.1] text-gray-700 dark:text-gray-400">
-                        {tech}
-                      </div>
-                    ))}
-                  </motion.div>
-                )}
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Tags - Now always visible outside 'Know More' */}
+        {project.tags && project.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2.5 mb-6 mt-4">
+            {project.tags.map((tech: string) => (
+              <div key={tech} className="px-2.5 py-1 text-[12px]   rounded-md border border-gray-200 dark:border-white/[0.1] text-gray-700 dark:text-gray-400 transition-colors duration-300 group-hover:border-gray-300 dark:group-hover:border-white/20">
+                {tech}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Footer */}
         <div className="flex items-center justify-between mt-auto">
@@ -295,12 +318,26 @@ function ProjectCard({ project, theme, index }: any) {
 
 export function Portfolio() {
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Safe data pipeline slices
-  const displayedProjects = showAllProjects ? PROJECTS_DATA : PROJECTS_DATA.slice(0, 2);
+  const displayedProjects = showAllProjects ? PROJECTS_DATA : PROJECTS_DATA.slice(0, 3);
+
+  if (!mounted) return null;
 
   return (
-    <div className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-24 px-6 md:px-4 pb-28 md:pb-20 pt-16 md:pt-10">
+    <motion.div 
+      key={resolvedTheme}
+      initial={{ opacity: 0.9, filter: "blur(4px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-24 px-6 md:px-4 pb-28 md:pb-20 pt-16 md:pt-10"
+    >
       
       {/* 1. HERO SECTION */}
       {/* 1. HERO SECTION */}
@@ -444,7 +481,7 @@ export function Portfolio() {
         </motion.div>
         <motion.h2 variants={textReveal} className="text-3xl font-bold mb-4 text-center tracking-tight">Check out my latest work</motion.h2>
         <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 mb-10 text-center text-xs max-w-xl">
-          I've worked on a variety of projects. Here are a few of my favorites.
+          I've worked on a variety of projects. Here are a few of them.
         </motion.p>
         
         <motion.div layout className="flex flex-col gap-6 w-full mt-4 mb-4">
@@ -467,7 +504,7 @@ export function Portfolio() {
           </AnimatePresence>
         </motion.div>
 
-        {PROJECTS_DATA.length > 2 && (
+        {PROJECTS_DATA.length > 3 && (
           <div className="w-full flex justify-center mt-6 mb-8">
              <button 
                 onClick={() => setShowAllProjects(!showAllProjects)}
@@ -476,6 +513,7 @@ export function Portfolio() {
                {showAllProjects ? 'Show Less' : 'More Projects'} 
                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showAllProjects ? 'rotate-180' : ''}`} />
              </button>
+
           </div>
         )}
       </motion.section>
@@ -556,6 +594,6 @@ export function Portfolio() {
         </motion.div>
       </motion.section>
 
-    </div>
+    </motion.div>
   );
 }
