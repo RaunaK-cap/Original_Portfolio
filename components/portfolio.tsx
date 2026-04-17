@@ -543,7 +543,7 @@ export function Portfolio() {
           ))}
         </div>
         <div>
-           <p className="mt-10 text-xs text-gray-300 dark:text-gray-400"> doesn't matter! she got someone else , however her smile was beautifull </p>
+           <p className="mt-10 text-xs text-gray-300 dark:text-gray-700"> but doesn't matter ! she got someone else,however her smile was beautiful </p>
         </div>
       </motion.section>
 
@@ -551,7 +551,7 @@ export function Portfolio() {
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full flex flex-col pt-0 md:pt-4"
+        className="w-full flex flex-col"
       >
         <motion.h2 variants={textReveal} className="text-xl font-bold mb-6 tracking-none">GitHub Activity</motion.h2>
         {/* Hide scrollbar structure securely but allow x-scroll for heavy mobile viewing */}
@@ -576,7 +576,7 @@ export function Portfolio() {
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full flex flex-col items-center mt-12 text-center"
+        className="w-full flex flex-col items-center  text-center"
       >
         <motion.div variants={textReveal}>
           <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">
@@ -585,8 +585,9 @@ export function Portfolio() {
         </motion.div>
         <motion.h2 variants={textReveal} className="text-xl md:text-4xl font-bold mb-6 tracking-tight max-w-md">Ready to Build Something Great?</motion.h2>
         <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 text-sm md:text-md mb-7 max-w-xl">
-          I'm available for freelance projects, consulting, and collaborations. Whether you need a web app, front-end magic, 
-          or full-stack development, let's discuss how I can help bring your vision to life.
+          I'm available for freelance project and collaborations. Whether you need a web app, front-end magic,
+          full-stack development or devOps(deployment system) <br/>
+          let's discuss..
         </motion.p>
         <motion.div variants={textReveal} className="flex items-center gap-4">
           <Button variant="default" className="rounded-full">Book a Free Consultation</Button>
