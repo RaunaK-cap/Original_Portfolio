@@ -565,6 +565,10 @@ export function Portfolio() {
 
           </div>
         )}
+        
+        <motion.div variants={textReveal}>
+          <Badge variant={"outline"} className="dark:text-gray-400 text-gray-600"> Soon i'll deploy some cool projects. Working on .. </Badge>
+        </motion.div>
       </motion.section>
 
       <motion.section 

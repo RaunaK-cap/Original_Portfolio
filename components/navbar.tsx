@@ -64,7 +64,7 @@ export function Navbar() {
           </Link>
           <Link href="https://x.com/caps_raunak" target="_blank" className="group relative flex items-center justify-center">
             
-            <div className="absolute inset-0 m-auto w-6 h-6 rounded-full bg-gray-300/60 dark:bg-gray-500/40 animate-ping transition-all"></div>
+            <div className="absolute inset-0 m-auto w-6 h-6 rounded-full transition-all"></div>
             
             <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="relative z-10 p-1 text-gray-600 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white transition-colors cursor-pointer">
               <svg viewBox="0 0 24 24" className="w-[1.1rem] h-[1.1rem] fill-current drop-shadow-sm" aria-hidden="true">
