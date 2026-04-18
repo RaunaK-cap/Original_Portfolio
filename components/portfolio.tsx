@@ -9,6 +9,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Globe, ExternalLink, ArrowUpRight, ArrowRight, ChevronDown } from "lucide-react";
 
+const XIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
+  </svg>
+);
+
 const GithubIcon = ({ className, strokeWidth = 2 }: { className?: string, strokeWidth?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.26c3.1-.3 6.4-1.5 6.4-6.9a5.1 5.1 0 0 0-1.4-3.6 5.1 5.1 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.5 12.5 0 0 0-6.7 0C6.1 2.5 5 2.8 5 2.8a5.1 5.1 0 0 0-.1 3.5 5.1 5.1 0 0 0-1.4 3.6c0 5.4 3.3 6.6 6.4 6.9a4.8 4.8 0 0 0-1 3.26v4" />
@@ -62,13 +68,15 @@ const EXPERIENCE_DATA = [
   {
     company: "Freelance",
     role: "Freelance Software Engineer",
+    duration: "Jan 2026 - Present",
     logoFallback: "FR",
-    logo: "https://cdn.simpleicons.org/fiverr/1DBF73",
+    logo: null,
     description: "Built the scalable backend for a web agency, developed a modern landing page for another, shipped an AI automation system using n8n for a client.",
   },
   {
     company: "Hacktoberfest",
     role: "Full Stack Engineer",
+    duration: "Sep 2025 - Oct 2025",
     logoFallback: "HF",
     logo: "https://cdn.simpleicons.org/hacktoberfest/0069FF",
     description: "Contributed to multiple open-source repositories and gained hands-on experience with collaborative development.",
@@ -505,8 +513,13 @@ export function Portfolio() {
                 {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-white/5 dark:bg-white/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <Avatar className="w-10 h-10 md:w-11 md:h-11 border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#0c0c0c] flex items-center justify-center transition-all duration-300 group-hover:border-gray-300 dark:group-hover:border-white/20 shadow-sm relative z-10">
-                   {(exp as any).logo && <AvatarImage src={(exp as any).logo} alt={exp.company} className="object-contain p-2" />}
-                   <AvatarFallback className="text-[11px] md:text-xs font-medium text-gray-600 dark:text-gray-400 bg-transparent">{exp.logoFallback}</AvatarFallback>
+                   {(exp as any).logo ? (
+                     <AvatarImage src={(exp as any).logo} alt={exp.company} className="object-contain p-2" />
+                   ) : exp.company === "Freelance" ? (
+                     <XIcon className="w-5 h-5 text-gray-900 dark:text-gray-100 transition-colors" />
+                   ) : (
+                     <AvatarFallback className="text-[11px] md:text-xs font-medium text-gray-600 dark:text-gray-400 bg-transparent">{exp.logoFallback}</AvatarFallback>
+                   )}
                 </Avatar>
               </div>
 
@@ -517,7 +530,7 @@ export function Portfolio() {
                     <h3 className="text-[15px] md:text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100 transition-colors">{exp.company}</h3>
                     <p className="text-[12px] text-gray-500 dark:text-[#a1a1aa]">{exp.role}</p>
                   </div>
-                  <span className="text-[13px] md:text-[13.5px] font-medium text-gray-400 dark:text-[#71717a] mt-1 md:mt-0">{exp.duration}</span>
+                
                 </div>
                 
                 {/* Optional Expanded Description */}
