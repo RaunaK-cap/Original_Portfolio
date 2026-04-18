@@ -5,9 +5,8 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Globe, ExternalLink, ArrowUpRight, ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
@@ -58,12 +57,6 @@ const textReveal: Variants = {
   },
 };
 
-/* =========================================
-   DATA CONFIGURATION
-   Modify these arrays to change your portfolio content!
-   ========================================= */
-
-// REPLACE: Update your Work Experience here
 const EXPERIENCE_DATA = [
   {
     company: "Freelance",
@@ -78,12 +71,11 @@ const EXPERIENCE_DATA = [
     role: "Full Stack Engineer",
     duration: "Sep 2025 - Oct 2025",
     logoFallback: "HF",
-    logo: "https://cdn.simpleicons.org/hacktoberfest/0069FF",
-    description: "Contributed to multiple open-source repositories and gained hands-on experience with collaborative development.",
+    logo: "https://www.google.com/s2/favicons?domain=hacktoberfest.com&sz=128",
+    description: "Contributed mostly to the frontend and several backend system across 8-9 open-source repositories.",
   },
 ];
 
-// REPLACE: Update your Education here
 const EDUCATION_DATA = [
   {
     institution: "Dummy University",
@@ -93,28 +85,24 @@ const EDUCATION_DATA = [
   },
 ];
 
-// REPLACE: Update your Skills here
 const SKILLS_DATA = [
-  // --- Infrastructure & Automation ---
   { name: "AWS", icon: "amazonaws/232F3E" },
   { name: "Docker", icon: "docker/2496ED" },
   { name: "CI/CD", icon: "githubactions/2088FF" },
   { name: "Kubernetes", icon: "kubernetes/326CE5" },
   
-  // --- AI & Ecosystem ---
   { name: "MCP", icon: "json/FFA500" },
   { name: "AI Agents", icon: "openai/412991" },
   { name: "Cursor", icon: "cursor/000000" },
   { name: "VS Code", icon: "visualstudiocode/007ACC" },
   { name: "Antigravity", icon: "googlegemini/8E75B2" },
   
-  // --- Databases & Streaming ---
   { name: "Redis", icon: "redis/DC382D" },
   { name: "Kafka", icon: "apachekafka/231F20" },
   { name: "WebSocket", icon: "socketdotio/ffffff" },
   { name: "gRPC", icon: "grpc/244C5A" },
 
-  // --- Languages & Frontend ---
+
   { name: "Rust", icon: "rust/000000" },
   { name: "JavaScript", icon: "javascript/F7DF1E" },
   { name: "TypeScript", icon: "typescript/3178C6" },
@@ -122,33 +110,30 @@ const SKILLS_DATA = [
   { name: "Next.js", icon: "nextdotjs/000000" }, 
   { name: "TailwindCSS", icon: "tailwindcss/06B6D4" }, 
 
-  // --- Backend & APIs ---
+
   { name: "Node.js", icon: "nodedotjs/339933" },
   { name: "Express.js", icon: "express/000000" },
   { name: "Better Auth", icon: "betterauth/000000" }, 
   { name: "Zod", icon: "zod/3068B7" },
   { name: "Langchain", icon: "langchain/000000" }, 
   
-  // --- Databases & ORMs ---
   { name: "PostgreSQL", icon: "postgresql/4169E1" },
   { name: "MongoDB", icon: "mongodb/47A248" },
   { name: "NeonDB", icon: "neon/00E599" },
   { name: "Prisma", icon: "prisma/5A67D8" },
 
-  // --- Tools & Others ---
+
   { name: "Turborepo", icon: "turborepo/EF4444" },
   { name: "Git/GitHub", icon: "git/F05032" },
   { name: "Postman", icon: "postman/FF6C37" },
 ];
 
 const ROTATING_PHRASES = [
-  "efficient, scalable, full-stack applications",
-  "robust, scalable backend architectures"
+  "efficient scalable,full-stack applications",
+  "Robust,scalable backend architectures"
 ];
 
 
-// Pre-defined exact color themes for projects to ensure Tailwind successfully compiles the classes.
-// You can add more like "purple" or "orange" by following this pattern!
 const PROJECT_THEMES: Record<string, any> = {
   green: {
     cardHover: "group-hover:border-green-500/40 group-hover:bg-green-500/[0.02]",
@@ -184,8 +169,6 @@ const PROJECT_THEMES: Record<string, any> = {
   }
 };
 
-// REPLACE: Update your Projects here
-// Pick a theme from PROJECT_THEMES above for the `colorTheme`
 const PROJECTS_DATA = [
   {
     title: "CrawlyMinds",
@@ -244,17 +227,15 @@ function ProjectCard({ project, theme, index }: any) {
     >
       <div className={`relative flex flex-col w-full border border-dashed border-gray-200 dark:border-white/[0.1] bg-gray-50/50 dark:bg-transparent p-6 md:p-7 transition-all duration-300 rounded-sm hover:-translate-y-1 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-gray-800 dark:shadow-none dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.01)] ${theme?.cardHover}`}>
         
-        {/* Title */}
         <h3 className={`text-lg md:text-[19px] font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300 ${theme?.textHover}`}>
           {project.title}
         </h3>
         
-        {/* Description */}
+    
         <p className="text-[13px] text-gray-600 dark:text-[#a1a1aa] mb-6 leading-relaxed pr-4">
           {project.description}
         </p>
 
-        {/* Expanded Content using Framer Motion physics */}
         <AnimatePresence initial={false}>
           {isExpanded && (
             <motion.div 
@@ -288,7 +269,7 @@ function ProjectCard({ project, theme, index }: any) {
           )}
         </AnimatePresence>
 
-        {/* Tags - Now always visible outside 'Know More' */}
+      
         {project.tags && project.tags.length > 0 && (
           <div className="flex flex-wrap gap-2.5 mb-6 mt-4">
             {project.tags.map((tech: string) => (
@@ -299,9 +280,9 @@ function ProjectCard({ project, theme, index }: any) {
           </div>
         )}
 
-        {/* Footer */}
+       
         <div className="flex items-center justify-between mt-auto">
-          {/* Know More Toggle */}
+          
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
             className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-900 dark:text-[#71717a] dark:hover:text-gray-300 transition-colors"
@@ -310,8 +291,7 @@ function ProjectCard({ project, theme, index }: any) {
             <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
           </button>
 
-          {/* Action Links */}
-          <div className="flex items-center gap-5">
+    <div className="flex items-center gap-5">
             {project.github && (
               <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[13.5px] text-gray-500 hover:text-gray-900 dark:text-[#71717a] dark:hover:text-gray-300 transition-colors group/link">
                 <GithubIcon className="w-4 h-4 transition-transform group-hover/link:-translate-y-1" strokeWidth={1.5} /> Repo
@@ -339,7 +319,7 @@ function RotatingText() {
   }, []);
 
   return (
-    <span className="relative inline-flex items-center justify-center h-[1.6em] sm:h-[1.7em] min-w-[7.5rem] sm:min-w-[15rem] border border-gray-200 dark:border-white/10 rounded-lg px-1.5 sm:px-4 mx-1 bg-gray-100/30 dark:bg-white/[0.03] overflow-hidden align-middle -mt-1 shadow-sm transition-all duration-300">
+    <span className="relative inline-flex items-center justify-center h-[1.5em] sm:h-[1.7em] min-w-[5rem] sm:min-w-[15rem] px-1 sm:px-2 mx-0.5 overflow-hidden align-middle -mt-0.5 transition-all duration-300">
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
@@ -373,7 +353,7 @@ function RotatingText() {
                 duration: 0.5, 
                 ease: [0.22, 1, 0.36, 1] 
               }}
-              className="inline-block text-orange-600 dark:text-orange-200/90 font-medium whitespace-nowrap text-xs md:text-sm"
+              className="inline-block text-orange-600 dark:text-orange-200/90 font-medium whitespace-nowrap text-[13px] sm:text-sm"
             >
               {word}
             </motion.span>
@@ -394,7 +374,6 @@ export function Portfolio() {
     setMounted(true);
   }, []);
 
-  // Safe data pipeline slices
   const displayedProjects = showAllProjects ? PROJECTS_DATA : PROJECTS_DATA.slice(0, 3);
 
   if (!mounted) return null;
@@ -405,18 +384,17 @@ export function Portfolio() {
       initial={{ opacity: 0.9, filter: "blur(4px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-24 px-6 md:px-4 pb-28 md:pb-20 pt-16 md:pt-10"
+      className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-14 md:space-y-20 transition-all duration-500 px-4 md:px-4 pb-20 pt-16 md:pt-10"
     >
       
-      {/* 1. HERO SECTION */}
-      {/* 1. HERO SECTION */}
       <motion.section 
+        id="hero"
         initial="hidden" animate="visible" variants={staggerContainer}
         className="w-full flex flex-col gap-6"
       >
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-row items-start justify-between gap-2 sm:gap-4 md:gap-6 w-full">
-            {/* Headline and Subtitle */}
+       
             <div className="flex flex-col gap-2 pt-2 md:pt-4 min-w-0">
               <motion.h1 variants={textReveal} className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-none leading-tight">
                 <span>Hi,</span>
@@ -425,7 +403,7 @@ export function Portfolio() {
                 </span>
               </motion.h1>
               <motion.p variants={textReveal} className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 tracking-none pr-1 sm:pr-2">
-                <span className="text-xs sm:text-base">20 • AI full Stack / devOps engineer</span>
+                <span className="text-xs sm:text-base">20 • AI Full Stack / DevOps Engineer</span>
               </motion.p>
             </div>
 
@@ -442,9 +420,9 @@ export function Portfolio() {
           </motion.div>
           </div>
 
-          {/* Bottom Row: Full Width Bio & Badge */}
+        
           <div className="flex flex-col gap-6 w-full">
-            {/* Structured Highlight Bio */}
+          
             <div className="flex flex-col gap-4 text-gray-500 dark:text-gray-300 text-sm  leading-relaxed w-full">
               <motion.p variants={textReveal}>
                 I build <RotatingText />Passionate about creating projects that make a <span className="text-orange-600 dark:text-orange-200/90 font-medium">real-world impact</span>. I focus on clean code and user experience.
@@ -454,7 +432,7 @@ export function Portfolio() {
                 Mostly, my interest towards building 
                 <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-white text-xs font-medium border border-gray-200 dark:border-gray-700">
                    <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-                   robust scalable backend / deployments infra / AI agents 
+                   Robust scalable backend / deployments infra / AI agents 
                 </span> 
                 
               </motion.div>
@@ -472,7 +450,7 @@ export function Portfolio() {
               </motion.p>
             </div>
 
-            {/* Available For Hire Badge */}
+        
             <motion.div variants={textReveal} className="group flex items-center gap-2 px-2.5 py-1.5 md:px-4 md:py-1.5 bg-gray-100/50 dark:bg-[#111111]/80 w-fit rounded-full border border-gray-200 dark:border-white/10 hover:border-green-500/30 dark:hover:border-green-500/30 transition-colors cursor-default shadow-sm">
               <div className="relative flex h-2 w-2 md:h-2.5 md:w-2.5 items-center justify-center">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 duration-1000"></span>
@@ -487,16 +465,15 @@ export function Portfolio() {
       </motion.section>
 
 
-      {/* 2. WORK EXPERIENCE */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
         variants={staggerContainer}
         className="w-full"
       >
-        <motion.h2 variants={textReveal} className="text-xl md:text-2xl font-bold mb-10 tracking-tight text-gray-900 dark:text-white">Work Experience</motion.h2>
+        <motion.h2 variants={textReveal} className="text-xl md:text-2xl font-bold mb-7 tracking-tight text-gray-900 dark:text-white">Work Experience</motion.h2>
         
         <div className="relative flex flex-col gap-10 pl-2 md:pl-0">
-          {/* The Pipeline Line layered underneath the nodes */}
+
           <div className="absolute left-7 md:left-5 top-2 bottom-2 w-[1px] bg-gray-200 dark:bg-white/[0.08] z-0" />
           
           {EXPERIENCE_DATA.map((exp, index) => (
@@ -508,9 +485,8 @@ export function Portfolio() {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="group flex gap-5 md:gap-6 w-full relative z-10"
             >
-              {/* Badge Node */}
               <div className="flex-shrink-0 relative">
-                {/* Glow effect on hover */}
+        
                 <div className="absolute inset-0 bg-white/5 dark:bg-white/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <Avatar className="w-10 h-10 md:w-11 md:h-11 border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#0c0c0c] flex items-center justify-center transition-all duration-300 group-hover:border-gray-300 dark:group-hover:border-white/20 shadow-sm relative z-10">
                    {(exp as any).logo ? (
@@ -523,7 +499,6 @@ export function Portfolio() {
                 </Avatar>
               </div>
 
-              {/* Content Node */}
               <div className="flex flex-col w-full gap-2 mt-0.5 md:mt-1">
                 <div className="flex flex-col md:flex-row md:items-start justify-between w-full gap-1 md:gap-4">
                   <div className="flex flex-col gap-1">
@@ -533,7 +508,6 @@ export function Portfolio() {
                 
                 </div>
                 
-                {/* Optional Expanded Description */}
                 {(exp as any).description && (
                   <p className="text-xs tracking-wide text-gray-600 dark:text-[#94a3b8] leading-relaxed max-w-xl mt-1.5">
                     {(exp as any).description}
@@ -546,9 +520,6 @@ export function Portfolio() {
       </motion.section>
 
 
-
-
-      {/* 3. PROJECTS */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
@@ -558,7 +529,7 @@ export function Portfolio() {
           <Badge variant="outline" className="mb-4 bg-gray-900 text-white dark:bg-white dark:text-black border-none px-3 py-1 font-medium">My Projects</Badge>
         </motion.div>
         <motion.h2 variants={textReveal} className="text-3xl font-bold mb-4 text-center tracking-tight">Check out my latest work</motion.h2>
-        <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 mb-10 text-center text-xs max-w-xl">
+        <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 mb-6 text-center text-xs max-w-xl">
           I've worked on a variety of projects. Here are a few of them.
         </motion.p>
         
@@ -596,7 +567,6 @@ export function Portfolio() {
         )}
       </motion.section>
 
-        {/* 4. SKILLS */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} 
         variants={fastStaggerContainer}
@@ -620,19 +590,19 @@ export function Portfolio() {
             </motion.div>
           ))}
         </div>
-        <div>
-           <p className="mt-10 text-xs text-gray-300 dark:text-gray-700"> but doesn't matter ! she got someone else,however her smile was beautiful </p>
-        </div>
+        <motion.p variants={textReveal} className="mt-6 text-xs text-gray-300 dark:text-gray-700 ">
+           but doesn't matter at all ! she got someone else,however her smile was beautiful 
+        </motion.p>
       </motion.section>
 
-      {/* 5. GITHUB ACTIVITY */}
+
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
         className="w-full flex flex-col"
       >
         <motion.h2 variants={textReveal} className="text-xl font-bold mb-6 tracking-none">GitHub Activity</motion.h2>
-        {/* Hide scrollbar structure securely but allow x-scroll for heavy mobile viewing */}
+
         <div className="w-full bg-[#f8f9fa] dark:bg-[#111111]/80 border border-gray-200/80 dark:border-white/[0.06] rounded-[14px] p-4 md:p-6 shadow-sm flex justify-center relative overflow-hidden">
           <div className="overflow-x-auto w-full flex justify-start md:justify-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             <img 
@@ -649,8 +619,6 @@ export function Portfolio() {
         </div>
       </motion.section>
 
-      
-      {/* 6. CONTACT CTA */}
       <motion.section 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
@@ -661,15 +629,14 @@ export function Portfolio() {
             Freelance & Collaboration
           </Badge>
         </motion.div>
-        <motion.h2 variants={textReveal} className="text-xl md:text-4xl font-bold mb-6 tracking-tight max-w-md">Ready to Build Something Great?</motion.h2>
+        <motion.h2 variants={textReveal} className="text-xl md:text-4xl font-bold mb-4 tracking-tight max-w-md">Ready to Build Something Great?</motion.h2>
         <motion.p variants={textReveal} className="text-gray-600 dark:text-gray-400 text-sm md:text-md mb-7 max-w-xl">
           I'm available for freelance project and collaborations. Whether you need a web app, front-end magic,
-          full-stack development or devOps(deployment system) <br/>
+          full-stack development or deployment system <br/>
           let's discuss..
         </motion.p>
         <motion.div variants={textReveal} className="flex items-center gap-4">
-          <Button variant="default" className="rounded-full">Book a Free Consultation</Button>
-          <Button variant="outline" className="rounded-full">Send an Email</Button>
+          <Button variant="outline" className=" px-10 cursor-pointer bg-blue-500 text-white hover:bg-blue-700 hover:text-white dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700 dark:hover:text-white">Send an Email</Button>
         </motion.div>
       </motion.section>
 

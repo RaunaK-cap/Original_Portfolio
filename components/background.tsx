@@ -28,7 +28,6 @@ export function Background() {
 
   return (
     <div className="fixed inset-0 z-[-1] min-h-screen w-full pointer-events-none overflow-hidden">
-      {/* Dynamic Background Gradient Layer */}
       <motion.div 
         initial={false}
         animate={{
@@ -40,7 +39,6 @@ export function Background() {
         className="absolute inset-0"
       />
       
-      {/* Particles Layer */}
       <motion.div 
         initial={false}
         animate={{ opacity: isDark ? 0.4 : 0.8 }}
@@ -62,7 +60,6 @@ export function Background() {
         ))}
       </motion.div>
 
-      {/* Clouds / Ambient Glow Layer */}
       <AnimatePresence mode="wait">
         {!isDark && (
           <motion.div 

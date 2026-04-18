@@ -4,7 +4,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme_provider";
 
-// Load Inter font and map it to Tailwind's default sans variable
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",

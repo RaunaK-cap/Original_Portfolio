@@ -10,14 +10,11 @@ export function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Hook natively into Framer's optimized scroll listener 
-  // This completely bypasses React's render lifecycle for scroll events, eliminating lag
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 40);
   });
 
   return (
-    // Sticky container wrapper 
     <div className="sticky top-4 md:top-6 z-50 w-full flex justify-center mb-10 mt-[-60px] pointer-events-none">
       <motion.nav 
         initial={{ y: -20, opacity: 0 }}
@@ -30,13 +27,15 @@ export function Navbar() {
         className="pointer-events-auto flex items-center gap-5 px-6 md:px-8 py-2 md:py-2.5 border border-gray-200/30 dark:border-white/10 rounded-full bg-white/40 dark:bg-black/30 backdrop-blur-xl backdrop-saturate-150 shadow-[0_8px_30px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(255,255,255,0.04)] w-fit mx-auto"
       >
         
-        {/* Left Section */}
         <div className="flex items-center gap-4 md:gap-5">
-          <Link href="#">
-            <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="p-1 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer">
+          <div 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="cursor-pointer"
+          >
+            <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="p-1 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
               <Home className="w-[1.1rem] h-[1.1rem]" strokeWidth={2.5} />
             </motion.div>
-          </Link>
+          </div>
           <Link href="#">
             <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="p-1 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer">
               <NotebookText className="w-[1.1rem] h-[1.1rem]" strokeWidth={2.5} />
@@ -44,10 +43,8 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Divider */}
         <div className="w-[1px] h-5 bg-gray-300/50 dark:bg-gray-700/50"></div>
 
-        {/* Middle Section */}
         <div className="flex items-center gap-4 md:gap-5">
           <Link href="https://github.com/RaunaK-cap" target="_blank">
             <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="p-1 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer">
@@ -65,10 +62,8 @@ export function Navbar() {
               </svg>
             </motion.div>
           </Link>
-          {/* Custom SVG for X (Twitter) */}
           <Link href="https://x.com/caps_raunak" target="_blank" className="group relative flex items-center justify-center">
             
-            {/* Continuous Pulse Ring */}
             <div className="absolute inset-0 m-auto w-6 h-6 rounded-full bg-gray-300/60 dark:bg-gray-500/40 animate-ping transition-all"></div>
             
             <motion.div whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }} className="relative z-10 p-1 text-gray-600 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white transition-colors cursor-pointer">
@@ -79,10 +74,8 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Divider */}
         <div className="w-[1px] h-5 bg-gray-300/50 dark:bg-gray-700/50"></div>
 
-        {/* Right Section */}
         <div className="flex items-center">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <ModeToggle />

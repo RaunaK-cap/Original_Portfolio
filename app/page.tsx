@@ -19,10 +19,8 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center pt-1 md:pt-2">
-      {/* Background component sits purely in the back */}
       <Background />
       
-      {/* The Content Dashboard with a smooth fade-out mask at the bottom */}
       <motion.div 
         key={resolvedTheme}
         initial={{ opacity: 0.95, filter: "blur(6px)" }}
@@ -34,10 +32,8 @@ export default function Home() {
           maskImage: 'linear-gradient(to bottom, black, black calc(100% - 180px), transparent 100%)'
         }}
       >
-        {/* Sticky floating Navbar */}
         <Navbar />
 
-        {/* The entire scroll-animated portfolio sections */}
         <Portfolio />
 
       </motion.div>
