@@ -62,7 +62,6 @@ const EXPERIENCE_DATA = [
   {
     company: "Freelance",
     role: "Freelance Software Engineer",
-    duration: "Jan 2026 - Present",
     logoFallback: "FR",
     logo: "https://cdn.simpleicons.org/fiverr/1DBF73",
     description: "Built the scalable backend for a web agency, developed a modern landing page for another, shipped an AI automation system using n8n for a client.",
@@ -70,7 +69,6 @@ const EXPERIENCE_DATA = [
   {
     company: "Hacktoberfest",
     role: "Full Stack Engineer",
-    duration: "Sep 2025 - Oct 2025",
     logoFallback: "HF",
     logo: "https://cdn.simpleicons.org/hacktoberfest/0069FF",
     description: "Contributed to multiple open-source repositories and gained hands-on experience with collaborative development.",
@@ -134,6 +132,12 @@ const SKILLS_DATA = [
   { name: "Git/GitHub", icon: "git/F05032" },
   { name: "Postman", icon: "postman/FF6C37" },
 ];
+
+const ROTATING_PHRASES = [
+  "efficient, scalable, full-stack applications",
+  "robust, scalable backend architectures"
+];
+
 
 // Pre-defined exact color themes for projects to ensure Tailwind successfully compiles the classes.
 // You can add more like "purple" or "orange" by following this pattern!
@@ -316,6 +320,63 @@ function ProjectCard({ project, theme, index }: any) {
   );
 }
 
+function RotatingText() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((current) => (current + 1) % ROTATING_PHRASES.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <span className="relative inline-flex items-center justify-center h-[1.6em] sm:h-[1.7em] min-w-[7.5rem] sm:min-w-[15rem] border border-gray-200 dark:border-white/10 rounded-lg px-1.5 sm:px-4 mx-1 bg-gray-100/30 dark:bg-white/[0.03] overflow-hidden align-middle -mt-1 shadow-sm transition-all duration-300">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.08,
+              },
+            },
+            exit: {
+              transition: {
+                staggerChildren: 0.05,
+                staggerDirection: -1,
+              },
+            },
+          }}
+          className="flex items-center gap-x-1 sm:gap-x-1.5"
+        >
+          {ROTATING_PHRASES[index].split(" ").map((word, i) => (
+            <motion.span
+              key={i}
+              variants={{
+                hidden: { y: 15, opacity: 0, filter: "blur(4px)" },
+                visible: { y: 0, opacity: 1, filter: "blur(0px)" },
+                exit: { y: -15, opacity: 0, filter: "blur(4px)" },
+              }}
+              transition={{ 
+                duration: 0.5, 
+                ease: [0.22, 1, 0.36, 1] 
+              }}
+              className="inline-block text-orange-600 dark:text-orange-200/90 font-medium whitespace-nowrap text-xs md:text-sm"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
+
 export function Portfolio() {
   const [showAllProjects, setShowAllProjects] = useState(false);
   const { resolvedTheme } = useTheme();
@@ -356,7 +417,7 @@ export function Portfolio() {
                 </span>
               </motion.h1>
               <motion.p variants={textReveal} className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 tracking-none pr-1 sm:pr-2">
-                <span className="text-xs sm:text-base">20 • AI Full Stack Engineer / DevOps</span>
+                <span className="text-xs sm:text-base">20 • AI full Stack / devOps engineer</span>
               </motion.p>
             </div>
 
@@ -378,20 +439,24 @@ export function Portfolio() {
             {/* Structured Highlight Bio */}
             <div className="flex flex-col gap-4 text-gray-500 dark:text-gray-300 text-sm  leading-relaxed w-full">
               <motion.p variants={textReveal}>
-                I build <span className="text-orange-600 dark:text-orange-200/90 font-medium">full-stack applications</span>. Passionate about creating projects that make a <span className="text-orange-600 dark:text-orange-200/90 font-medium">real-world impact</span>. I focus on clean code and user experience.
+                I build <RotatingText />Passionate about creating projects that make a <span className="text-orange-600 dark:text-orange-200/90 font-medium">real-world impact</span>. I focus on clean code and user experience.
               </motion.p>
               
               <motion.div variants={textReveal} className="flex items-center gap-2 flex-wrap">
-                Previously interned at 
+                Mostly, my interest towards building 
                 <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-white text-xs font-medium border border-gray-200 dark:border-gray-700">
                    <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-                   Dummy Startup
+                   robust scalable backend / deployments infra / AI agents 
                 </span> 
-                building AI infrastructure.
+                
               </motion.div>
 
               <motion.p variants={textReveal}>
-                I work with <strong className="text-gray-900 dark:text-white font-medium">Next.js</strong> and <strong className="text-gray-900 dark:text-white font-medium">Rust</strong> most days, using <strong className="text-gray-900 dark:text-white font-medium">TypeScript</strong> for type safety. I enjoy building things that look good and perform well.
+                I've worked with some <strong className="text-gray-900 dark:text-white font-medium">freelance client </strong> and shipped few products  <strong className="text-gray-900 dark:text-white font-medium">AI automation system </strong> Backend system <strong className="text-gray-900 dark:text-white font-medium"> modern website design for an agency </strong> . I can do this all day.
+              </motion.p>
+
+              <motion.p variants={textReveal}>
+                In my free time, I dive into <strong className="text-gray-900 dark:text-white font-medium">AI / tech research papers</strong>, explore new tech with <strong className="text-gray-900 dark:text-white font-medium">Rust</strong>, and build intelligent systems. I also take on side work <strong className="text-gray-900 dark:text-white font-medium">repairing electronic hardware</strong> and peripherals.
               </motion.p>
 
               <motion.p variants={textReveal}>
