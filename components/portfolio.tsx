@@ -72,7 +72,7 @@ const EXPERIENCE_DATA = [
     duration: "Sep 2025 - Oct 2025",
     logoFallback: "HF",
     logo: "https://www.google.com/s2/favicons?domain=hacktoberfest.com&sz=128",
-    description: "Contributed mostly to the frontend and several backend system across 8-9 open-source repositories.",
+    description: "Worked mostly on the frontend & several backend system across 8-9 open-source repositories.",
   },
 ];
 
