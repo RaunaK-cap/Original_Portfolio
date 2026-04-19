@@ -442,7 +442,7 @@ export function Portfolio() {
               </motion.p>
 
               <motion.p variants={textReveal}>
-                In my free time, I dive into <strong className="text-gray-900 dark:text-white font-medium"> disturbuted async backend system / AI / tech research papers</strong>, explore new tech with <strong className="text-gray-900 dark:text-white font-medium">Rust</strong>, and build intelligent systems. I also take on side work <strong className="text-gray-900 dark:text-white font-medium">repairing electronic hardware</strong> and peripherals.
+                In my free time, I dive into <strong className="text-gray-900 dark:text-white font-medium"> distributed async backend system / AI / tech research papers</strong>, explore new tech with <strong className="text-gray-900 dark:text-white font-medium">Rust</strong>, and build intelligent systems. I also take on side work <strong className="text-gray-900 dark:text-white font-medium">repairing electronic hardware</strong> and peripherals.
               </motion.p>
 
               <motion.p variants={textReveal}>
