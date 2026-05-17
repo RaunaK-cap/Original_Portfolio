@@ -217,92 +217,140 @@ const PROJECTS_DATA = [
 function ProjectCard({ project, theme, index }: any) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const glowColorMap: Record<string, string> = {
+    green: "from-green-500/30 to-green-500/0",
+    blue: "from-blue-500/30 to-blue-500/0",
+    orange: "from-orange-500/30 to-orange-500/0",
+    purple: "from-purple-500/30 to-purple-500/0",
+  };
+  const glowClass = glowColorMap[project.colorTheme] || "from-gray-500/30 to-gray-500/0";
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="w-full"
+      className="w-full flex flex-col h-full"
     >
-      <div className={`relative flex flex-col w-full border border-dashed border-gray-200 dark:border-white/[0.1] bg-gray-50/50 dark:bg-transparent p-6 md:p-7 transition-all duration-300 rounded-sm hover:-translate-y-1 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-gray-800 dark:shadow-none dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.01)] ${theme?.cardHover}`}>
+      <div className={`group relative flex flex-col h-full w-full rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white dark:bg-[#0c0c0e] overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md dark:shadow-none dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.02)] ${theme?.cardHover}`}>
         
-        <h3 className={`text-lg md:text-[19px] font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300 ${theme?.textHover}`}>
-          {project.title}
-        </h3>
-        
-    
-        <p className="text-[13px] text-gray-600 dark:text-[#a1a1aa] mb-6 leading-relaxed pr-4">
-          {project.description}
-        </p>
-
-        <AnimatePresence initial={false}>
-          {isExpanded && (
-            <motion.div 
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1, transition: { type: "spring", stiffness: 400, damping: 30 } }}
-              exit={{ height: 0, opacity: 0, transition: { duration: 0.2, ease: "easeOut" } }}
-              className="overflow-hidden flex flex-col"
-            >
-              <motion.div 
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } }
-                }}
-                className="mb-6 pt-1"
-              >
-                {project.features && project.features.length > 0 && (
-                  <div className="flex flex-col gap-4 mb-6">
-                    {project.features.map((feature: any, idx: number) => (
-                      <motion.p 
-                        variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }} 
-                        key={idx} className="text-xs text-gray-600 dark:text-[#94a3b8] leading-relaxed"
-                      >
-                        {feature}
-                      </motion.p>
-                    ))}
-                  </div>
-                )}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-      
-        {project.tags && project.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2.5 mb-6 mt-4">
-            {project.tags.map((tech: string) => (
-              <div key={tech} className="px-2.5 py-1 text-[12px]   rounded-md border border-gray-200 dark:border-white/[0.1] text-gray-700 dark:text-gray-400 transition-colors duration-300 group-hover:border-gray-300 dark:group-hover:border-white/20">
-                {tech}
-              </div>
-            ))}
-          </div>
-        )}
-
-       
-        <div className="flex items-center justify-between mt-auto">
-          
-          <button 
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-900 dark:text-[#71717a] dark:hover:text-gray-300 transition-colors"
-          >
-            {isExpanded ? 'Know Less' : 'Know More'}
-            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
-          </button>
-
-    <div className="flex items-center gap-5">
-            {project.github && (
-              <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[13.5px] text-gray-500 hover:text-gray-900 dark:text-[#71717a] dark:hover:text-gray-300 transition-colors group/link">
-                <GithubIcon className="w-4 h-4 transition-transform group-hover/link:-translate-y-1" strokeWidth={1.5} /> Repo
-              </a>
-            )}
-            <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[13.5px] font-medium text-gray-500 hover:text-gray-900 dark:text-[#71717a] dark:hover:text-[#e4e4e7] transition-colors group/link">
-              Visit <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" strokeWidth={1.5} />
-            </a>
+        {/* Top Image Placeholder Section */}
+        <div className="p-3 md:p-4 pb-0">
+          <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 dark:bg-[#151518] flex items-center justify-center transition-colors">
+            {/* Background Glow */}
+            <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-3/4 bg-gradient-to-b ${glowClass} blur-3xl rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
+            
+            {/* The image tag - left empty space for user to fill later */}
+            {/* Example: <img src="/project1.png" alt={project.title} className="w-full h-full object-cover relative z-10" /> */}
+            <div className="relative z-10 text-gray-400 dark:text-gray-600 text-sm flex flex-col items-center gap-2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+              <span>Image Placeholder</span>
+            </div>
           </div>
         </div>
 
+        {/* Content Section */}
+        <div className="flex flex-col flex-grow p-4 md:p-5">
+          <div className="flex items-start justify-between gap-4 mb-3">
+            <h3 className={`text-[17px] md:text-[19px] font-semibold tracking-tight text-gray-900 dark:text-gray-100 transition-colors duration-300 ${theme?.textHover}`}>
+              {project.title}
+            </h3>
+            
+            <div className="flex items-center gap-2.5 shrink-0 mt-0.5">
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors" title="View Source">
+                  <GithubIcon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+                </a>
+              )}
+              {project.link && (
+                <a href={project.link} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors" title="Visit Website">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                </a>
+              )}
+            </div>
+          </div>
+          
+          <div className="text-[13px] text-gray-600 dark:text-[#a1a1aa] mb-4 leading-relaxed flex-grow">
+            {project.description}
+          </div>
+
+          <AnimatePresence initial={false}>
+            {isExpanded && (
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1, transition: { type: "spring", stiffness: 400, damping: 30 } }}
+                exit={{ height: 0, opacity: 0, transition: { duration: 0.2, ease: "easeOut" } }}
+                className="overflow-hidden flex flex-col"
+              >
+                <motion.div 
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } }
+                  }}
+                  className="mb-5 pt-1"
+                >
+                  {project.features && project.features.length > 0 && (
+                    <div className="flex flex-col gap-2.5">
+                      {project.features.map((feature: any, idx: number) => (
+                        <motion.p 
+                          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }} 
+                          key={idx} className="text-[12px] text-gray-600 dark:text-[#94a3b8] leading-relaxed flex gap-2"
+                        >
+                          <span className="mt-1.5 block w-1 h-1 shrink-0 rounded-full bg-gray-400 dark:bg-gray-600" />
+                          <span>{feature}</span>
+                        </motion.p>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-gray-100 dark:border-white/[0.05]">
+            {project.tags && project.tags.length > 0 ? (
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {project.tags.slice(0, 5).map((tech: string) => {
+                  const skill = SKILLS_DATA.find(s => 
+                    s.name.toLowerCase() === tech.toLowerCase() || 
+                    s.name.toLowerCase().includes(tech.toLowerCase()) || 
+                    tech.toLowerCase().includes(s.name.toLowerCase())
+                  );
+                  
+                  if (skill) {
+                    return (
+                      <div key={tech} className="w-6 h-6 rounded-full bg-gray-100 dark:bg-white/[0.08] flex items-center justify-center border border-gray-200 dark:border-white/10" title={tech}>
+                        <img src={`https://cdn.simpleicons.org/${skill.icon}`} alt={tech} className="w-3.5 h-3.5 object-contain" onError={(e) => e.currentTarget.style.display = 'none'} />
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div key={tech} className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-gray-100 dark:bg-white/[0.05] text-gray-700 dark:text-gray-300">
+                      {tech}
+                    </div>
+                  );
+                })}
+                {project.tags.length > 5 && (
+                  <div className="px-1.5 py-0.5 text-[10px] font-medium rounded-md text-gray-500 dark:text-gray-400">
+                    +{project.tags.length - 5}
+                  </div>
+                )}
+              </div>
+            ) : <div />}
+            
+            <button 
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-1 text-[11px] font-medium text-gray-500 hover:text-gray-900 dark:text-[#71717a] dark:hover:text-gray-300 transition-colors ml-auto"
+            >
+              {isExpanded ? 'Less' : 'More'}
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+            </button>
+          </div>
+
+        </div>
       </div>
     </motion.div>
   );
@@ -399,11 +447,11 @@ export function Portfolio() {
               <motion.h1 variants={textReveal} className="flex flex-col md:gap-3 text-[32px] sm:text-4xl md:text-5xl font-bold tracking-none leading-tight">
                 <span>Hi,</span>
                 <span className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2">
-                  <span>I'm Raunak<span className="hidden md:inline-block ml-2">👋</span></span>
+                  <span>I'm Raunak</span>
                 </span>
               </motion.h1>
               <motion.p variants={textReveal} className="flex flex-col gap-1 text-gray-400 dark:text-gray-400 tracking-none pr-1 sm:pr-2">
-                <span className="text-xs sm:text-base">20 • AI Full Stack / DevOps Engineer</span>
+                <span className="text-xs sm:text-base"> AI Full Stack / DevOps Engineer</span>
               </motion.p>
             </div>
 
@@ -533,7 +581,7 @@ export function Portfolio() {
           I've worked on a variety of projects. Here are a few of them.
         </motion.p>
         
-        <motion.div layout className="flex flex-col gap-6 w-full mt-4 mb-4">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 w-full mt-4 mb-4">
           <AnimatePresence mode="popLayout">
             {displayedProjects.map((project, index) => {
               const theme = PROJECT_THEMES[project.colorTheme] || PROJECT_THEMES.green;
@@ -545,6 +593,7 @@ export function Portfolio() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.4 }}
+                  className="w-full h-full flex"
                 >
                   <ProjectCard project={project} theme={theme} index={index} />
                 </motion.div>
